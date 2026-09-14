@@ -15,7 +15,6 @@ A quiet theme for long reading and writing, built on the [Firelight palette](htt
 - Internal and external links can take separate colors
 - Twenty-one task states, each with its own glyph and hue
 - Focus options that dim inactive panes and fade the interface until you reach for it
-- 53 settings in 13 flat sections, no submenus to dig through
 
 ![Task states, each with its own glyph and hue](assets/artwork_03.png)
 

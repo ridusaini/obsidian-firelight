@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Questions and ideas
+    url: https://github.com/ridusaini/obsidian-firelight/issues
+    about: Ask a question, suggest an option, or show work in progress
+  - name: Firelight palette
+    url: https://github.com/ridusaini/firelight
+    about: The colors themselves live here, not in the theme

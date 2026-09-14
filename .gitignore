@@ -1,0 +1,10 @@
+node_modules/
+.DS_Store
+*.log
+.idea/
+.vscode/
+
+# Local development vault state, not part of the theme
+test-vault/.obsidian/plugins/
+test-vault/.obsidian/themes/
+test-vault/.obsidian/workspace.json

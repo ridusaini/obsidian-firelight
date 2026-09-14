@@ -1,0 +1,2953 @@
+/*
+ * Firelight for Obsidian
+ * MIT License — Copyright (c) 2026 Firelight contributors
+ */
+
+/* @settings
+
+name: Firelight
+id: firelight
+settings:
+  -
+    id: firelight-colors
+    title: Colors
+    description: Palette, accent, highlight, and the hues everything else draws from.
+    type: heading
+    level: 1
+    collapsed: false
+  -
+    id: firelight-palette-dark
+    title: Dark palette
+    description: Choose the higher-contrast Coal palette or the softer Smoulder palette.
+    type: class-select
+    allowEmpty: false
+    default: firelight-palette-dark-smoulder
+    options:
+      -
+        label: Smoulder
+        value: firelight-palette-dark-smoulder
+      -
+        label: Coal
+        value: firelight-palette-dark-coal
+  -
+    id: firelight-accent
+    title: Accent
+    description: Follow Obsidian's accent, choose a Firelight preset, or set a custom color.
+    type: class-select
+    allowEmpty: false
+    default: firelight-accent-obsidian
+    options:
+      -
+        label: Obsidian accent
+        value: firelight-accent-obsidian
+      -
+        label: Rose
+        value: firelight-accent-rose
+      -
+        label: Ember
+        value: firelight-accent-ember
+      -
+        label: Coral
+        value: firelight-accent-coral
+      -
+        label: Apricot
+        value: firelight-accent-apricot
+      -
+        label: Honey
+        value: firelight-accent-honey
+      -
+        label: Fern
+        value: firelight-accent-fern
+      -
+        label: Verdigris
+        value: firelight-accent-verdigris
+      -
+        label: Cornflower
+        value: firelight-accent-cornflower
+      -
+        label: Lilac
+        value: firelight-accent-lilac
+      -
+        label: Orchid
+        value: firelight-accent-orchid
+      -
+        label: Custom
+        value: firelight-accent-custom
+  -
+    id: fl-accent-custom
+    title: Custom accent
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-light: '#b83f5f'
+    default-dark: '#dd7b8f'
+  -
+    id: firelight-highlight
+    title: Highlight
+    description: The color used behind highlighted text.
+    type: class-select
+    allowEmpty: false
+    default: firelight-highlight-honey
+    options:
+      -
+        label: Accent
+        value: firelight-highlight-accent
+      -
+        label: Neutral
+        value: firelight-highlight-neutral
+      -
+        label: Rose
+        value: firelight-highlight-rose
+      -
+        label: Ember
+        value: firelight-highlight-ember
+      -
+        label: Coral
+        value: firelight-highlight-coral
+      -
+        label: Apricot
+        value: firelight-highlight-apricot
+      -
+        label: Honey
+        value: firelight-highlight-honey
+      -
+        label: Fern
+        value: firelight-highlight-fern
+      -
+        label: Verdigris
+        value: firelight-highlight-verdigris
+      -
+        label: Cornflower
+        value: firelight-highlight-cornflower
+      -
+        label: Lilac
+        value: firelight-highlight-lilac
+      -
+        label: Orchid
+        value: firelight-highlight-orchid
+      -
+        label: Custom
+        value: firelight-highlight-custom
+  -
+    id: fl-highlight-custom
+    title: Custom highlight
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-light: '#a1884b'
+    default-dark: '#f1ddad'
+  -
+    id: firelight-typography
+    title: Typography
+    description: How note text is set, including headings and markdown syntax.
+    type: heading
+    level: 1
+    collapsed: true
+  -
+    id: firelight-font-editor
+    title: Editor font
+    description: Use Hanken Grotesk for a clean layout or Space Mono for a typewriter feel.
+    type: class-select
+    allowEmpty: false
+    default: firelight-font-editor-sans
+    options:
+      -
+        label: Hanken Grotesk
+        value: firelight-font-editor-sans
+      -
+        label: Space Mono
+        value: firelight-font-editor-mono
+  -
+    id: fl-line-height
+    title: Line height
+    description: Vertical spacing within note text.
+    type: variable-number-slider
+    default: 1.68
+    min: 1.4
+    max: 2
+    step: 0.04
+  -
+    id: firelight-heading-scale
+    title: Heading scale
+    description: A compact hierarchy, the balanced default, or a stronger editorial scale.
+    type: class-select
+    allowEmpty: false
+    default: firelight-heading-scale-balanced
+    options:
+      -
+        label: Compact
+        value: firelight-heading-scale-compact
+      -
+        label: Balanced
+        value: firelight-heading-scale-balanced
+      -
+        label: Editorial
+        value: firelight-heading-scale-editorial
+  -
+    id: firelight-heading-divider
+    title: Heading divider
+    description: A hairline under headings, drawn in the heading's own color.
+    type: class-select
+    allowEmpty: false
+    default: firelight-heading-divider-none
+    options:
+      -
+        label: None
+        value: firelight-heading-divider-none
+      -
+        label: H1
+        value: firelight-heading-divider-h1
+      -
+        label: H1 and H2
+        value: firelight-heading-divider-h2
+      -
+        label: All levels
+        value: firelight-heading-divider-all
+  -
+    id: firelight-heading-color
+    title: Heading colors
+    description: Keep headings neutral, use the Firelight spectrum, or choose every color.
+    type: class-select
+    allowEmpty: false
+    default: firelight-heading-color-neutral
+    options:
+      -
+        label: Neutral
+        value: firelight-heading-color-neutral
+      -
+        label: Firelight
+        value: firelight-heading-color-firelight
+      -
+        label: Custom
+        value: firelight-heading-color-custom
+  -
+    id: fl-heading-1-custom
+    title: Heading 1
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-light: '#3a3129'
+    default-dark: '#eae2dc'
+  -
+    id: fl-heading-2-custom
+    title: Heading 2
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-light: '#3a3129'
+    default-dark: '#eae2dc'
+  -
+    id: fl-heading-3-custom
+    title: Heading 3
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-light: '#473e36'
+    default-dark: '#d7cec8'
+  -
+    id: fl-heading-4-custom
+    title: Heading 4
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-light: '#473e36'
+    default-dark: '#d7cec8'
+  -
+    id: fl-heading-5-custom
+    title: Heading 5
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-light: '#4c4946'
+    default-dark: '#c5c3c0'
+  -
+    id: fl-heading-6-custom
+    title: Heading 6
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-light: '#53545a'
+    default-dark: '#b5b6b9'
+  -
+    id: firelight-emphasis-color
+    title: Emphasis
+    description: The color of bold and italic text.
+    type: class-select
+    allowEmpty: false
+    default: firelight-emphasis-color-neutral
+    options:
+      -
+        label: Neutral
+        value: firelight-emphasis-color-neutral
+      -
+        label: Accent
+        value: firelight-emphasis-color-accent
+  -
+    id: firelight-syntax-marks
+    title: Formatting marks
+    description: The visual weight of markdown syntax in Live Preview.
+    type: class-select
+    allowEmpty: false
+    default: firelight-syntax-marks-quiet
+    options:
+      -
+        label: Clear
+        value: firelight-syntax-marks-clear
+      -
+        label: Quiet
+        value: firelight-syntax-marks-quiet
+      -
+        label: Minimal
+        value: firelight-syntax-marks-minimal
+  -
+    id: firelight-layout
+    title: Layout
+    description: Line length and the shape and density of the interface around it.
+    type: heading
+    level: 1
+    collapsed: true
+  -
+    id: fl-line-length
+    title: Line length
+    description: Applies when Obsidian's readable line length is on. Turn that off for full-pane notes.
+    type: variable-number-slider
+    default: 56
+    min: 36
+    max: 96
+    step: 1
+    format: rem
+  -
+    id: firelight-density
+    title: Density
+    description: Tab, toolbar, and navigation height.
+    type: class-select
+    allowEmpty: false
+    default: firelight-density-comfortable
+    options:
+      -
+        label: Comfortable
+        value: firelight-density-comfortable
+      -
+        label: Compact
+        value: firelight-density-compact
+  -
+    id: firelight-corner
+    title: Corners
+    description: The shape of cards, callouts, menus, tabs, and inputs.
+    type: class-select
+    allowEmpty: false
+    default: firelight-corner-crisp
+    options:
+      -
+        label: Crisp
+        value: firelight-corner-crisp
+      -
+        label: Soft
+        value: firelight-corner-soft
+      -
+        label: Rounded
+        value: firelight-corner-rounded
+  -
+    id: firelight-motion
+    title: Motion
+    description: The system reduced-motion preference always disables animation.
+    type: class-select
+    allowEmpty: false
+    default: firelight-motion-normal
+    options:
+      -
+        label: Normal
+        value: firelight-motion-normal
+      -
+        label: Reduced
+        value: firelight-motion-reduced
+      -
+        label: 'Off'
+        value: firelight-motion-off
+  -
+    id: firelight-property-layout
+    title: Properties
+    description: Density of the frontmatter panel at the top of a note.
+    type: class-select
+    allowEmpty: false
+    default: firelight-property-layout-default
+    options:
+      -
+        label: Default
+        value: firelight-property-layout-default
+      -
+        label: Compact
+        value: firelight-property-layout-compact
+      -
+        label: Minimal
+        value: firelight-property-layout-minimal
+  -
+    id: firelight-focus-dim
+    title: Dim inactive panes
+    description: Fades every pane except the one you are working in.
+    type: class-toggle
+    default: false
+  -
+    id: firelight-focus-chrome
+    title: Reduce active-pane chrome
+    description: Fades the tab header and status bar until you hover them.
+    type: class-toggle
+    default: false
+  -
+    id: firelight-blockquotes
+    title: Blockquotes
+    type: heading
+    level: 1
+    collapsed: true
+  -
+    id: firelight-quote-surface
+    title: Surface
+    description: A surface and an edge can be used together.
+    type: class-select
+    allowEmpty: false
+    default: firelight-quote-surface-subtle
+    options:
+      -
+        label: None
+        value: firelight-quote-surface-none
+      -
+        label: Subtle
+        value: firelight-quote-surface-subtle
+      -
+        label: Medium
+        value: firelight-quote-surface-medium
+      -
+        label: Strong
+        value: firelight-quote-surface-strong
+  -
+    id: firelight-quote-edge
+    title: Edge
+    description: Thickness of the rule down the inside edge.
+    type: class-select
+    allowEmpty: false
+    default: firelight-quote-edge-medium
+    options:
+      -
+        label: None
+        value: firelight-quote-edge-none
+      -
+        label: Subtle
+        value: firelight-quote-edge-subtle
+      -
+        label: Medium
+        value: firelight-quote-edge-medium
+      -
+        label: Strong
+        value: firelight-quote-edge-strong
+  -
+    id: firelight-callouts
+    title: Callouts
+    type: heading
+    level: 1
+    collapsed: true
+  -
+    id: firelight-callout-surface
+    title: Surface
+    description: A surface and an edge can be used together.
+    type: class-select
+    allowEmpty: false
+    default: firelight-callout-surface-subtle
+    options:
+      -
+        label: None
+        value: firelight-callout-surface-none
+      -
+        label: Subtle
+        value: firelight-callout-surface-subtle
+      -
+        label: Medium
+        value: firelight-callout-surface-medium
+      -
+        label: Strong
+        value: firelight-callout-surface-strong
+  -
+    id: firelight-callout-edge
+    title: Edge
+    description: Thickness of the rule down the inside edge.
+    type: class-select
+    allowEmpty: false
+    default: firelight-callout-edge-none
+    options:
+      -
+        label: None
+        value: firelight-callout-edge-none
+      -
+        label: Subtle
+        value: firelight-callout-edge-subtle
+      -
+        label: Medium
+        value: firelight-callout-edge-medium
+      -
+        label: Strong
+        value: firelight-callout-edge-strong
+  -
+    id: firelight-callout-color
+    title: Colors
+    description: Familiar standard colors, Firelight's softer palette, or your own.
+    type: class-select
+    allowEmpty: false
+    default: firelight-callout-color-firelight
+    options:
+      -
+        label: Standard
+        value: firelight-callout-color-standard
+      -
+        label: Firelight
+        value: firelight-callout-color-firelight
+      -
+        label: Custom
+        value: firelight-callout-color-custom
+  -
+    id: fl-callout-info-custom
+    title: Information
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-light: '#6387c9'
+    default-dark: '#98b7ec'
+  -
+    id: fl-callout-positive-custom
+    title: Positive
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-light: '#69974a'
+    default-dark: '#a2c88b'
+  -
+    id: fl-callout-caution-custom
+    title: Caution
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-light: '#a1884b'
+    default-dark: '#f1ddad'
+  -
+    id: fl-callout-critical-custom
+    title: Critical
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-light: '#c7504f'
+    default-dark: '#eb8b86'
+  -
+    id: firelight-code
+    title: Code blocks
+    type: heading
+    level: 1
+    collapsed: true
+  -
+    id: firelight-code-wrap
+    title: Long lines
+    description: Applies to reading view. Editor code blocks always wrap.
+    type: class-select
+    allowEmpty: false
+    default: firelight-code-wrap-on
+    options:
+      -
+        label: Wrap
+        value: firelight-code-wrap-on
+      -
+        label: Scroll
+        value: firelight-code-wrap-off
+  -
+    id: firelight-active-line-section
+    title: Active line
+    type: heading
+    level: 1
+    collapsed: true
+  -
+    id: firelight-active-line
+    title: Style
+    description: How the line under the cursor is marked.
+    type: class-select
+    allowEmpty: false
+    default: firelight-active-line-tint
+    options:
+      -
+        label: None
+        value: firelight-active-line-none
+      -
+        label: Tint
+        value: firelight-active-line-tint
+      -
+        label: Indicator
+        value: firelight-active-line-indicator
+  -
+    id: firelight-active-line-color
+    title: Color
+    description: Neutral keeps the mark quiet; accent makes it a cursor beacon.
+    type: class-select
+    allowEmpty: false
+    default: firelight-active-line-color-neutral
+    options:
+      -
+        label: Neutral
+        value: firelight-active-line-color-neutral
+      -
+        label: Accent
+        value: firelight-active-line-color-accent
+  -
+    id: firelight-images
+    title: Images
+    type: heading
+    level: 1
+    collapsed: true
+  -
+    id: firelight-image-width
+    title: Width
+    description: Fit keeps the image's own size, up to the note width. Fill stretches it to the note width.
+    type: class-select
+    allowEmpty: false
+    default: firelight-image-width-fit
+    options:
+      -
+        label: Fit
+        value: firelight-image-width-fit
+      -
+        label: Fill
+        value: firelight-image-width-fill
+  -
+    id: firelight-links
+    title: Links
+    type: heading
+    level: 1
+    collapsed: true
+  -
+    id: firelight-link-internal-color
+    title: Internal color
+    description: Notes, headings, and blocks inside the vault.
+    type: class-select
+    allowEmpty: false
+    default: firelight-link-internal-color-cornflower
+    options:
+      -
+        label: Accent
+        value: firelight-link-internal-color-accent
+      -
+        label: Rose
+        value: firelight-link-internal-color-rose
+      -
+        label: Ember
+        value: firelight-link-internal-color-ember
+      -
+        label: Coral
+        value: firelight-link-internal-color-coral
+      -
+        label: Apricot
+        value: firelight-link-internal-color-apricot
+      -
+        label: Honey
+        value: firelight-link-internal-color-honey
+      -
+        label: Fern
+        value: firelight-link-internal-color-fern
+      -
+        label: Verdigris
+        value: firelight-link-internal-color-verdigris
+      -
+        label: Cornflower
+        value: firelight-link-internal-color-cornflower
+      -
+        label: Lilac
+        value: firelight-link-internal-color-lilac
+      -
+        label: Orchid
+        value: firelight-link-internal-color-orchid
+      -
+        label: Custom
+        value: firelight-link-internal-color-custom
+  -
+    id: fl-link-internal-custom
+    title: Custom internal color
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-light: '#6387c9'
+    default-dark: '#98b7ec'
+  -
+    id: firelight-link-underline
+    title: Underline
+    description: Always underlined, on hover only, or color alone.
+    type: class-select
+    allowEmpty: false
+    default: firelight-link-underline-hover
+    options:
+      -
+        label: Always
+        value: firelight-link-underline-always
+      -
+        label: On hover
+        value: firelight-link-underline-hover
+      -
+        label: Never
+        value: firelight-link-underline-never
+  -
+    id: firelight-link-external-color
+    title: External color
+    description: Addresses outside the vault. Obsidian marks these with an icon, so Match is usually enough.
+    type: class-select
+    allowEmpty: false
+    default: firelight-link-external-color-match
+    options:
+      -
+        label: Match internal
+        value: firelight-link-external-color-match
+      -
+        label: Accent
+        value: firelight-link-external-color-accent
+      -
+        label: Rose
+        value: firelight-link-external-color-rose
+      -
+        label: Ember
+        value: firelight-link-external-color-ember
+      -
+        label: Coral
+        value: firelight-link-external-color-coral
+      -
+        label: Apricot
+        value: firelight-link-external-color-apricot
+      -
+        label: Honey
+        value: firelight-link-external-color-honey
+      -
+        label: Fern
+        value: firelight-link-external-color-fern
+      -
+        label: Verdigris
+        value: firelight-link-external-color-verdigris
+      -
+        label: Cornflower
+        value: firelight-link-external-color-cornflower
+      -
+        label: Lilac
+        value: firelight-link-external-color-lilac
+      -
+        label: Orchid
+        value: firelight-link-external-color-orchid
+      -
+        label: Custom
+        value: firelight-link-external-color-custom
+  -
+    id: fl-link-external-custom
+    title: Custom external color
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-light: '#6387c9'
+    default-dark: '#98b7ec'
+  -
+    id: firelight-link-hover
+    title: Hover
+    description: Applies to both link types.
+    type: class-select
+    allowEmpty: false
+    default: firelight-link-hover-deepen
+    options:
+      -
+        label: Deepen
+        value: firelight-link-hover-deepen
+      -
+        label: Accent
+        value: firelight-link-hover-accent
+      -
+        label: None
+        value: firelight-link-hover-none
+  -
+    id: firelight-lists
+    title: Lists and tasks
+    type: heading
+    level: 1
+    collapsed: true
+  -
+    id: fl-list-spacing
+    title: List spacing
+    description: Vertical space between list items.
+    type: variable-number-slider
+    default: 0.075
+    min: 0
+    max: 0.6
+    step: 0.025
+    format: em
+  -
+    id: firelight-task-done
+    title: Completed tasks
+    description: Completed items are always dimmed; this adds the strike.
+    type: class-select
+    allowEmpty: false
+    default: firelight-task-done-strike
+    options:
+      -
+        label: Struck through
+        value: firelight-task-done-strike
+      -
+        label: Dimmed
+        value: firelight-task-done-dim
+  -
+    id: firelight-embeds
+    title: Note embeds
+    type: heading
+    level: 1
+    collapsed: true
+  -
+    id: firelight-embed-layout
+    title: Layout
+    description: Let embedded notes flow with the page, sit on a tinted panel, or sit inside an outlined box.
+    type: class-select
+    allowEmpty: false
+    default: firelight-embed-layout-seamless
+    options:
+      -
+        label: Seamless
+        value: firelight-embed-layout-seamless
+      -
+        label: Panel
+        value: firelight-embed-layout-panel
+      -
+        label: Box
+        value: firelight-embed-layout-box
+  -
+    id: firelight-embed-label
+    title: Source label
+    description: The note name shown in the corner of an embed.
+    type: class-select
+    allowEmpty: false
+    default: firelight-embed-label-hover
+    options:
+      -
+        label: On hover
+        value: firelight-embed-label-hover
+      -
+        label: Always
+        value: firelight-embed-label-always
+      -
+        label: Hidden
+        value: firelight-embed-label-hidden
+  -
+    id: firelight-tables
+    title: Tables
+    type: heading
+    level: 1
+    collapsed: true
+  -
+    id: firelight-table-border
+    title: Borders
+    description: Which rules are drawn between cells.
+    type: class-select
+    allowEmpty: false
+    default: firelight-table-border-header
+    options:
+      -
+        label: None
+        value: firelight-table-border-none
+      -
+        label: Header
+        value: firelight-table-border-header
+      -
+        label: Rows
+        value: firelight-table-border-row
+      -
+        label: Columns
+        value: firelight-table-border-column
+      -
+        label: Grid
+        value: firelight-table-border-grid
+  -
+    id: firelight-table-width
+    title: Width
+    description: Fit shrinks the table to its cells. Fill stretches it to the note width.
+    type: class-select
+    allowEmpty: false
+    default: firelight-table-width-fit
+    options:
+      -
+        label: Fit
+        value: firelight-table-width-fit
+      -
+        label: Fill
+        value: firelight-table-width-fill
+  -
+    id: firelight-table-stripe
+    title: Striped rows
+    description: Can be combined with any border treatment.
+    type: class-toggle
+    default: false
+  -
+    id: firelight-tags
+    title: Tags
+    type: heading
+    level: 1
+    collapsed: true
+  -
+    id: firelight-tag-surface
+    title: Surface
+    description: How strongly the tag background is tinted.
+    type: class-select
+    allowEmpty: false
+    default: firelight-tag-surface-subtle
+    options:
+      -
+        label: None
+        value: firelight-tag-surface-none
+      -
+        label: Subtle
+        value: firelight-tag-surface-subtle
+      -
+        label: Medium
+        value: firelight-tag-surface-medium
+  -
+    id: firelight-tag-shape
+    title: Shape
+    description: Corner shape of the tag background.
+    type: class-select
+    allowEmpty: false
+    default: firelight-tag-shape-corner
+    options:
+      -
+        label: Corners
+        value: firelight-tag-shape-corner
+      -
+        label: Pill
+        value: firelight-tag-shape-pill
+
+*/
+
+/* Scales and defaults */
+
+body {
+  /*
+   * Mix percentages. 6% suggests, 10% distinguishes, 14% emphasizes.
+   * Washes sit behind text and so run stronger than surface tints.
+   */
+  --fl-tint-1: 6%;
+  --fl-tint-2: 10%;
+  --fl-tint-3: 14%;
+  --fl-wash-1: 24%;
+  --fl-wash-2: 32%;
+  --fl-rule-alpha-1: 48%;
+  --fl-rule-alpha-2: 64%;
+  --fl-text-mix-1: 72%;
+  --fl-text-mix-2: 80%;
+
+  /* Rule widths, motion and depth */
+  --fl-rule-1: 1px;
+  --fl-rule-2: 2px;
+  --fl-rule-3: 3px;
+  --fl-motion-fast: 120ms;
+  --fl-motion-moderate: 180ms;
+  --fl-motion-slow: 240ms;
+  --fl-opacity-muted: 0.72;
+  --fl-shadow-floating: 0 12px 32px rgb(0 0 0 / 24%);
+
+  /* Type and measure */
+  --fl-font-sans: "Hanken Grotesk", inter, "Helvetica Neue", arial, sans-serif;
+  --fl-font-mono: "Space Mono", "SFMono-Regular", consolas, "Liberation Mono",
+    monospace;
+  --fl-font-editor: var(--fl-font-sans);
+  --fl-line-length: 56rem;
+  --fl-line-length-cap: 92%;
+  --fl-line-height: 1.68;
+  --fl-list-spacing: 0.075em;
+  --fl-editor-font-size: 1em;
+  --fl-editor-letter-spacing: 0;
+
+  /* Color choices. The option classes further down replace these. */
+  --fl-accent: hsl(var(--accent-h) var(--accent-s) var(--accent-l));
+  --fl-highlight: var(--fl-honey);
+  --fl-active-line-tone: var(--fl-ink-1);
+  --fl-callout-info: var(--fl-cornflower);
+  --fl-callout-positive: var(--fl-fern);
+  --fl-callout-caution: var(--fl-honey);
+  --fl-callout-critical: var(--fl-ember);
+
+  /* Links */
+  --fl-hover-chroma: 1.35;
+  --fl-link-internal: var(--fl-cornflower);
+  --fl-link-external: var(--fl-link-internal);
+  --fl-link-internal-hover: oklch(
+    from var(--fl-link-internal)
+    calc(l + var(--fl-hover-lift))
+    calc(c * var(--fl-hover-chroma))
+    h
+  );
+  --fl-link-external-hover: oklch(
+    from var(--fl-link-external)
+    calc(l + var(--fl-hover-lift))
+    calc(c * var(--fl-hover-chroma))
+    h
+  );
+  --fl-link-underline: none;
+  --fl-link-underline-hover: underline;
+
+  /* Component strengths. The option classes further down replace these. */
+  --fl-quote-tint: var(--fl-tint-1);
+  --fl-quote-rule: var(--fl-rule-2);
+  --fl-callout-tint: var(--fl-tint-1);
+  --fl-callout-rule: 0;
+  --fl-tag-tint: var(--fl-tint-1);
+
+  /* Obsidian: fonts and motion */
+  --font-interface-theme: var(--fl-font-sans);
+  --font-text-theme: var(--fl-font-sans);
+  --font-monospace-theme: var(--fl-font-mono);
+  --anim-duration-fast: var(--fl-motion-fast);
+  --anim-duration-moderate: var(--fl-motion-moderate);
+  --anim-duration-slow: var(--fl-motion-slow);
+
+  /* Obsidian: measure and rhythm */
+  --file-line-width: min(var(--fl-line-length), var(--fl-line-length-cap));
+  --line-height-normal: var(--fl-line-height);
+  --line-height-tight: 1.35;
+  --list-spacing: var(--fl-list-spacing);
+  --p-spacing: 1rem;
+  --heading-spacing: calc(var(--p-spacing) * 2.1);
+
+  /* Obsidian: radii */
+  --radius-s: 2px;
+  --radius-m: 3px;
+  --radius-l: 4px;
+  --input-radius: var(--radius-s);
+  --tab-radius-active: var(--radius-s);
+  --checkbox-radius: var(--radius-s);
+  --menu-radius: var(--radius-m);
+  --modal-radius: var(--radius-l);
+  --bases-cards-radius: var(--radius-m);
+  --image-radius: var(--radius-m);
+  --code-radius: var(--radius-s);
+  --toggle-radius: 999px;
+  --toggle-thumb-radius: 999px;
+  --slider-thumb-radius: 999px;
+
+  /* Obsidian: headings and emphasis */
+  --h1-size: 1.9em;
+  --h2-size: 1.55em;
+  --h3-size: 1.3em;
+  --h4-size: 1.15em;
+  --h5-size: 1.05em;
+  --h6-size: 1em;
+  --h1-weight: 700;
+  --h2-weight: 680;
+  --h3-weight: 650;
+  --h4-weight: 650;
+  --h5-weight: 620;
+  --h6-weight: 620;
+  --bold-modifier: 100;
+
+  /* Obsidian: links, rules and callouts */
+  --link-decoration: var(--fl-link-underline);
+  --link-decoration-hover: var(--fl-link-underline-hover);
+  --link-external-decoration: var(--fl-link-underline);
+  --link-external-decoration-hover: var(--fl-link-underline-hover);
+  --link-decoration-thickness: 0.08em;
+  --divider-width: 0;
+  --tab-outline-width: 0;
+  --table-border-width: 0;
+  --hr-thickness: 1px;
+  --blockquote-border-thickness: var(--fl-quote-rule);
+  --callout-border-width: 0;
+  --callout-radius: var(--radius-m);
+  --callout-padding: var(--size-4-3) var(--size-4-4);
+
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Palettes */
+
+.theme-light {
+  color-scheme: light;
+
+  --fl-hover-lift: -0.09;
+  --fl-message: var(--fl-ink-1);
+  --fl-surface-0: #fef8f6;
+  --fl-surface-1: #f4eeec;
+  --fl-surface-2: #d7d2cf;
+  --fl-surface-3: #b8b6b5;
+  --fl-surface-4: #9c9b9a;
+  --fl-surface-5: #81807f;
+  --fl-ink-5: #676d7c;
+  --fl-ink-4: #5c606d;
+  --fl-ink-3: #53545a;
+  --fl-ink-2: #4c4946;
+  --fl-ink-1: #473e36;
+  --fl-ink-0: #3a3129;
+  --fl-rose: #b83f5f;
+  --fl-ember: #c7504f;
+  --fl-coral: #c86746;
+  --fl-apricot: #be7c45;
+  --fl-honey: #a1884b;
+  --fl-fern: #69974a;
+  --fl-verdigris: #279b8e;
+  --fl-cornflower: #6387c9;
+  --fl-lilac: #8a86b3;
+  --fl-orchid: #a476c1;
+  --fl-standard-info: #086ddd;
+  --fl-standard-positive: #08b94e;
+  --fl-standard-caution: #ec7500;
+  --fl-standard-critical: #e93147;
+}
+
+.theme-dark,
+.theme-dark.firelight-palette-dark-smoulder {
+  color-scheme: dark;
+
+  --fl-hover-lift: 0.09;
+  --fl-message: var(--fl-surface-2);
+  --fl-surface-0: #232222;
+  --fl-surface-1: #2e2e2e;
+  --fl-surface-2: #414040;
+  --fl-surface-3: #555454;
+  --fl-surface-4: #6a6a69;
+  --fl-surface-5: #848483;
+  --fl-ink-5: #9196a3;
+  --fl-ink-4: #a3a8b4;
+  --fl-ink-3: #b5b6b9;
+  --fl-ink-2: #c5c3c0;
+  --fl-ink-1: #d7cec8;
+  --fl-ink-0: #eae2dc;
+  --fl-rose: #dd7b8f;
+  --fl-ember: #eb8b86;
+  --fl-coral: #ed9d83;
+  --fl-apricot: #f1bb90;
+  --fl-honey: #f1ddad;
+  --fl-fern: #a2c88b;
+  --fl-verdigris: #81cfc3;
+  --fl-cornflower: #98b7ec;
+  --fl-lilac: #cac8ed;
+  --fl-orchid: #ceaae6;
+  --fl-standard-info: #027aff;
+  --fl-standard-positive: #44cf6e;
+  --fl-standard-caution: #e9973f;
+  --fl-standard-critical: #fb464c;
+}
+
+.theme-dark.firelight-palette-dark-coal {
+  --fl-surface-0: #1b1a19;
+  --fl-surface-1: #232222;
+  --fl-surface-2: #353434;
+  --fl-surface-3: #484746;
+  --fl-surface-4: #5d5c5c;
+  --fl-surface-5: #777676;
+  --fl-ink-5: #818aa1;
+  --fl-ink-4: #9ba3b8;
+  --fl-ink-3: #b3b5bc;
+  --fl-ink-2: #cbc6c3;
+  --fl-ink-1: #e6d7cd;
+  --fl-ink-0: #f8eae0;
+  --fl-rose: #f06b8a;
+  --fl-ember: #ff7c78;
+  --fl-coral: #ff936f;
+  --fl-apricot: #ffb57a;
+  --fl-honey: #f8dc99;
+  --fl-fern: #99cc78;
+  --fl-verdigris: #62d4c5;
+  --fl-cornflower: #8db6ff;
+  --fl-lilac: #c9c6f8;
+  --fl-orchid: #d5a3f5;
+}
+
+/* Obsidian bridge */
+
+.theme-dark,
+.theme-light {
+  --fl-heading-1: var(--fl-ink-0);
+  --fl-heading-2: var(--fl-ink-0);
+  --fl-heading-3: var(--fl-ink-1);
+  --fl-heading-4: var(--fl-ink-1);
+  --fl-heading-5: var(--fl-ink-2);
+  --fl-heading-6: var(--fl-ink-3);
+
+  /* Neutral scale */
+  --color-base-00: var(--fl-surface-0);
+  --color-base-05: var(--fl-surface-1);
+  --color-base-10: var(--fl-surface-2);
+  --color-base-20: var(--fl-surface-3);
+  --color-base-25: var(--fl-surface-4);
+  --color-base-30: var(--fl-surface-5);
+  --color-base-35: var(--fl-ink-5);
+  --color-base-40: var(--fl-ink-4);
+  --color-base-50: var(--fl-ink-3);
+  --color-base-60: var(--fl-ink-2);
+  --color-base-70: var(--fl-ink-1);
+  --color-base-100: var(--fl-ink-0);
+
+  /* Extended colors */
+  --color-red: var(--fl-ember);
+  --color-orange: var(--fl-coral);
+  --color-yellow: var(--fl-honey);
+  --color-green: var(--fl-fern);
+  --color-cyan: var(--fl-verdigris);
+  --color-blue: var(--fl-cornflower);
+  --color-purple: var(--fl-orchid);
+  --color-pink: var(--fl-rose);
+  --color-accent: var(--fl-accent);
+  --color-accent-1: color-mix(in oklch, var(--fl-accent) 88%, var(--fl-ink-0));
+  --color-accent-2: color-mix(in oklch, var(--fl-accent) 76%, var(--fl-ink-0));
+
+  /* Surfaces */
+  --background-primary: var(--fl-surface-1);
+  --background-primary-alt: var(--fl-surface-0);
+  --background-secondary: var(--fl-surface-0);
+  --background-secondary-alt: var(--fl-surface-1);
+  --background-modifier-hover: var(--fl-surface-2);
+  --background-modifier-active-hover: var(--fl-surface-3);
+  --background-modifier-border: color-mix(
+    in oklch,
+    var(--fl-surface-3) var(--fl-rule-alpha-1),
+    transparent
+  );
+  --background-modifier-border-hover: color-mix(
+    in oklch,
+    var(--fl-surface-4) var(--fl-rule-alpha-2),
+    transparent
+  );
+  --background-modifier-border-focus: var(--color-accent);
+  --background-modifier-form-field: var(--fl-surface-0);
+  --embed-background: transparent;
+  --background-modifier-message: var(--fl-message);
+  --background-modifier-error: color-mix(
+    in oklch,
+    var(--fl-ember) var(--fl-tint-2),
+    var(--fl-surface-1)
+  );
+  --background-modifier-error-hover: color-mix(
+    in oklch,
+    var(--fl-ember) var(--fl-tint-3),
+    var(--fl-surface-1)
+  );
+  --background-modifier-success: color-mix(
+    in oklch,
+    var(--fl-fern) var(--fl-tint-2),
+    var(--fl-surface-1)
+  );
+
+  /* Text and interaction */
+  --text-normal: var(--fl-ink-1);
+  --text-muted: var(--fl-ink-4);
+  --text-faint: var(--fl-ink-5);
+  --text-accent: var(--color-accent);
+  --text-accent-hover: oklch(
+    from var(--color-accent) calc(l + var(--fl-hover-lift))
+    calc(c * var(--fl-hover-chroma))
+    h
+  );
+  --text-on-accent: var(--fl-surface-0);
+  --text-on-accent-inverted: var(--fl-ink-0);
+  --text-success: color-mix(
+    in oklch,
+    var(--fl-fern) var(--fl-text-mix-1),
+    var(--fl-ink-0)
+  );
+  --text-warning: color-mix(
+    in oklch,
+    var(--fl-honey) var(--fl-text-mix-1),
+    var(--fl-ink-0)
+  );
+  --text-error: color-mix(
+    in oklch,
+    var(--fl-ember) var(--fl-text-mix-2),
+    var(--fl-ink-0)
+  );
+  --text-selection: color-mix(
+    in oklch,
+    var(--fl-lilac) var(--fl-wash-1),
+    transparent
+  );
+  --text-highlight-bg: color-mix(
+    in oklch,
+    var(--fl-highlight) var(--fl-wash-2),
+    transparent
+  );
+  --caret-color: var(--color-accent);
+  --interactive-normal: var(--fl-surface-2);
+  --interactive-hover: var(--fl-surface-3);
+  --interactive-accent: var(--color-accent);
+  --interactive-accent-hover: oklch(
+    from var(--color-accent) calc(l + var(--fl-hover-lift))
+    calc(c * var(--fl-hover-chroma))
+    h
+  );
+
+  /* Window and workspace */
+  --titlebar-background: var(--fl-surface-0);
+  --titlebar-background-focused: var(--fl-surface-0);
+  --titlebar-text-color: var(--fl-ink-4);
+  --titlebar-text-color-focused: var(--fl-ink-2);
+  --ribbon-background: var(--fl-surface-0);
+  --ribbon-background-collapsed: var(--fl-surface-0);
+  --divider-color: transparent;
+  --divider-color-hover: var(--color-accent);
+  --status-bar-background: var(--fl-surface-0);
+  --status-bar-border-color: transparent;
+  --file-header-background: var(--fl-surface-1);
+  --file-header-background-focused: var(--fl-surface-1);
+  --modal-background: var(--fl-surface-1);
+  --modal-border-color: transparent;
+  --prompt-background: var(--fl-surface-1);
+  --scrollbar-bg: transparent;
+  --scrollbar-thumb-bg: var(--fl-surface-3);
+  --scrollbar-active-thumb-bg: var(--fl-surface-4);
+
+  /* Icons and navigation */
+  --icon-color: var(--fl-ink-4);
+  --icon-color-hover: var(--fl-ink-1);
+  --icon-color-active: var(--color-accent);
+  --icon-color-focused: var(--fl-ink-0);
+  --nav-item-color: var(--fl-ink-4);
+  --nav-item-color-hover: var(--fl-ink-1);
+  --nav-item-color-active: var(--fl-ink-0);
+  --nav-item-color-selected: var(--fl-ink-0);
+  --nav-item-background-hover: var(--fl-surface-2);
+  --nav-item-background-active: color-mix(
+    in oklch,
+    var(--color-accent) var(--fl-tint-3),
+    var(--fl-surface-1)
+  );
+  --nav-item-background-selected: var(--fl-surface-2);
+  --nav-indentation-guide-color: var(--fl-surface-3);
+  --nav-collapse-icon-color: var(--fl-ink-5);
+  --nav-collapse-icon-color-collapsed: var(--fl-ink-4);
+
+  /* Tabs */
+  --tab-container-background: var(--fl-surface-0);
+  --tab-background-active: var(--fl-surface-1);
+  --tab-divider-color: transparent;
+  --tab-outline-color: transparent;
+  --tab-text-color: var(--fl-ink-5);
+  --tab-text-color-active: var(--fl-ink-2);
+  --tab-text-color-focused: var(--fl-ink-4);
+  --tab-text-color-focused-active: var(--fl-ink-0);
+  --tab-text-color-focused-active-current: var(--fl-ink-0);
+  --tab-text-color-focused-highlighted: var(--color-accent);
+
+  /* Notes and typography */
+  --h1-color: var(--fl-heading-1);
+  --h2-color: var(--fl-heading-2);
+  --h3-color: var(--fl-heading-3);
+  --h4-color: var(--fl-heading-4);
+  --h5-color: var(--fl-heading-5);
+  --h6-color: var(--fl-heading-6);
+  --bold-color: var(--fl-ink-0);
+  --italic-color: var(--fl-ink-2);
+  --link-color: var(--fl-link-internal);
+  --link-color-hover: var(--fl-link-internal-hover);
+  --link-external-color: var(--fl-link-external);
+  --link-external-color-hover: var(--fl-link-external-hover);
+  --link-unresolved-color: var(--fl-ink-4);
+  --link-unresolved-opacity: 0.85;
+  --link-unresolved-decoration-color: var(--fl-surface-4);
+  --blockquote-color: var(--fl-ink-3);
+  --blockquote-background-color: color-mix(
+    in oklch,
+    var(--color-accent) var(--fl-quote-tint),
+    transparent
+  );
+  --blockquote-border-color: color-mix(
+    in oklch,
+    var(--color-accent) var(--fl-rule-alpha-2),
+    transparent
+  );
+  --hr-color: var(--fl-surface-3);
+  --list-marker-color: var(--fl-ink-5);
+  --list-marker-color-hover: var(--color-accent);
+  --list-marker-color-collapsed: var(--color-accent);
+
+  /* Code */
+  --code-background: var(--fl-surface-0);
+  --code-normal: var(--fl-ink-1);
+  --code-comment: var(--fl-ink-5);
+  --code-function: var(--fl-cornflower);
+  --code-important: var(--fl-ember);
+  --code-keyword: var(--fl-orchid);
+  --code-operator: var(--fl-ink-3);
+  --code-property: var(--fl-verdigris);
+  --code-punctuation: var(--fl-ink-4);
+  --code-string: var(--fl-fern);
+  --code-tag: var(--fl-coral);
+  --code-value: var(--fl-apricot);
+
+  /* Tags and tasks */
+  --tag-color: var(--fl-ink-2);
+  --tag-color-hover: var(--fl-ink-0);
+  --tag-background: color-mix(
+    in oklch,
+    var(--fl-ink-1) var(--fl-tag-tint),
+    var(--fl-surface-1)
+  );
+  --tag-background-hover: color-mix(
+    in oklch,
+    var(--color-accent) var(--fl-tint-3),
+    var(--fl-surface-1)
+  );
+  --tag-border-color: transparent;
+  --tag-border-color-hover: var(--color-accent);
+  --tag-radius: var(--radius-s);
+  --checkbox-color: var(--color-accent);
+  --checkbox-color-hover: var(--interactive-accent-hover);
+  --checkbox-border-color: var(--fl-surface-4);
+  --checkbox-border-color-hover: var(--color-accent);
+  --checklist-done-color: var(--fl-ink-5);
+
+  /* Callouts, mapping Obsidian's fourteen slots onto four roles */
+  --callout-default: var(--fl-callout-info);
+  --callout-info: var(--fl-callout-info);
+  --callout-summary: var(--fl-callout-info);
+  --callout-example: var(--fl-callout-info);
+  --callout-quote: var(--fl-callout-info);
+  --callout-todo: var(--fl-callout-positive);
+  --callout-tip: var(--fl-callout-positive);
+  --callout-important: var(--fl-callout-positive);
+  --callout-success: var(--fl-callout-positive);
+  --callout-question: var(--fl-callout-caution);
+  --callout-warning: var(--fl-callout-caution);
+  --callout-fail: var(--fl-callout-critical);
+  --callout-error: var(--fl-callout-critical);
+  --callout-bug: var(--fl-callout-critical);
+  --callout-content-background: transparent;
+
+  /* Tables and properties */
+  --table-background: transparent;
+  --table-border-color: var(--fl-surface-3);
+  --table-header-background: var(--fl-surface-0);
+  --table-header-background-hover: var(--fl-surface-2);
+  --table-header-color: var(--fl-ink-2);
+  --table-row-background-hover: var(--fl-surface-2);
+  --table-row-alt-background-hover: var(--fl-surface-2);
+  --metadata-divider-color: var(--fl-surface-3);
+  --metadata-label-text-color: var(--fl-ink-4);
+  --metadata-input-text-color: var(--fl-ink-1);
+  --metadata-property-background-hover: var(--fl-surface-2);
+  --metadata-property-background-active: var(--fl-surface-0);
+  --metadata-label-background-active: var(--fl-surface-0);
+  --metadata-input-background-active: var(--fl-surface-0);
+
+  /* Graph, Canvas, and Bases */
+  --graph-line: var(--fl-surface-3);
+  --graph-node: var(--fl-ink-4);
+  --graph-node-focused: var(--color-accent);
+  --graph-node-tag: var(--fl-verdigris);
+  --graph-node-attachment: var(--fl-apricot);
+  --graph-node-unresolved: var(--fl-ink-5);
+  --canvas-background: var(--fl-surface-1);
+  --canvas-card-label-color: var(--fl-ink-4);
+  --canvas-dot-pattern: var(--fl-surface-3);
+  --canvas-color: var(--fl-rose);
+  --canvas-color-1: var(--fl-rose);
+  --canvas-color-2: var(--fl-coral);
+  --canvas-color-3: var(--fl-honey);
+  --canvas-color-4: var(--fl-fern);
+  --canvas-color-5: var(--fl-cornflower);
+  --canvas-color-6: var(--fl-orchid);
+  --bases-cards-background: var(--fl-surface-0);
+  --bases-cards-cover-background: var(--fl-surface-2);
+  --bases-table-border-color: var(--fl-surface-3);
+}
+
+/* Colors */
+
+body.firelight-accent-obsidian {
+  --fl-accent: hsl(var(--accent-h) var(--accent-s) var(--accent-l));
+}
+
+body.firelight-accent-rose {
+  --fl-accent: var(--fl-rose);
+}
+
+body.firelight-accent-ember {
+  --fl-accent: var(--fl-ember);
+}
+
+body.firelight-accent-coral {
+  --fl-accent: var(--fl-coral);
+}
+
+body.firelight-accent-apricot {
+  --fl-accent: var(--fl-apricot);
+}
+
+body.firelight-accent-honey {
+  --fl-accent: var(--fl-honey);
+}
+
+body.firelight-accent-fern {
+  --fl-accent: var(--fl-fern);
+}
+
+body.firelight-accent-verdigris {
+  --fl-accent: var(--fl-verdigris);
+}
+
+body.firelight-accent-cornflower {
+  --fl-accent: var(--fl-cornflower);
+}
+
+body.firelight-accent-lilac {
+  --fl-accent: var(--fl-lilac);
+}
+
+body.firelight-accent-orchid {
+  --fl-accent: var(--fl-orchid);
+}
+
+body.firelight-accent-custom {
+  --fl-accent: var(--fl-accent-custom);
+}
+
+body.firelight-highlight-rose {
+  --fl-highlight: var(--fl-rose);
+}
+
+body.firelight-highlight-ember {
+  --fl-highlight: var(--fl-ember);
+}
+
+body.firelight-highlight-coral {
+  --fl-highlight: var(--fl-coral);
+}
+
+body.firelight-highlight-apricot {
+  --fl-highlight: var(--fl-apricot);
+}
+
+body.firelight-highlight-honey {
+  --fl-highlight: var(--fl-honey);
+}
+
+body.firelight-highlight-fern {
+  --fl-highlight: var(--fl-fern);
+}
+
+body.firelight-highlight-verdigris {
+  --fl-highlight: var(--fl-verdigris);
+}
+
+body.firelight-highlight-cornflower {
+  --fl-highlight: var(--fl-cornflower);
+}
+
+body.firelight-highlight-lilac {
+  --fl-highlight: var(--fl-lilac);
+}
+
+body.firelight-highlight-orchid {
+  --fl-highlight: var(--fl-orchid);
+}
+
+body.firelight-highlight-accent {
+  --fl-highlight: var(--color-accent);
+}
+
+body.firelight-highlight-neutral {
+  --fl-highlight: var(--fl-ink-3);
+}
+
+body.firelight-highlight-custom {
+  --fl-highlight: var(--fl-highlight-custom);
+}
+
+/* Typography */
+
+body.firelight-font-editor-sans {
+  --fl-font-editor: var(--fl-font-sans);
+  --fl-editor-font-size: 1em;
+  --fl-editor-letter-spacing: 0;
+}
+
+body.firelight-font-editor-mono {
+  --fl-font-editor: var(--fl-font-mono);
+  --fl-editor-font-size: 0.96em;
+  --fl-editor-letter-spacing: -0.012em;
+}
+
+/*
+ * Each scale decays toward 1.0 rather than holding one ratio, so h5 and h6
+ * converge on body size instead of continuing a geometric run.
+ */
+body.firelight-heading-scale-compact {
+  --heading-spacing: calc(var(--p-spacing) * 1.7);
+  --h1-size: 1.62em;
+  --h2-size: 1.4em;
+  --h3-size: 1.22em;
+  --h4-size: 1.1em;
+  --h5-size: 1em;
+  --h6-size: 0.94em;
+}
+
+body.firelight-heading-scale-balanced {
+  --heading-spacing: calc(var(--p-spacing) * 2.1);
+  --h1-size: 1.9em;
+  --h2-size: 1.55em;
+  --h3-size: 1.3em;
+  --h4-size: 1.15em;
+  --h5-size: 1.05em;
+  --h6-size: 1em;
+}
+
+body.firelight-heading-scale-editorial {
+  --heading-spacing: calc(var(--p-spacing) * 2.45);
+  --h1-size: 2.35em;
+  --h2-size: 1.82em;
+  --h3-size: 1.42em;
+  --h4-size: 1.2em;
+  --h5-size: 1.04em;
+  --h6-size: 0.94em;
+}
+
+body.firelight-emphasis-color-accent {
+  --bold-color: var(--color-accent);
+  --italic-color: var(--color-accent);
+}
+
+/* stylelint-disable selector-class-pattern -- Obsidian editor classes */
+body:is(
+    .firelight-heading-divider-h1,
+    .firelight-heading-divider-h2,
+    .firelight-heading-divider-all
+  )
+  :is(.markdown-rendered h1, .cm-line.HyperMD-header-1),
+body:is(.firelight-heading-divider-h2, .firelight-heading-divider-all)
+  :is(.markdown-rendered h2, .cm-line.HyperMD-header-2),
+body.firelight-heading-divider-all
+  :is(
+    .markdown-rendered :is(h3, h4, h5, h6),
+    .cm-line:is(
+      .HyperMD-header-3,
+      .HyperMD-header-4,
+      .HyperMD-header-5,
+      .HyperMD-header-6
+    )
+  ) {
+  padding-block-end: 0.24em;
+  border-block-end: var(--fl-rule-1) solid
+    color-mix(in oklch, currentcolor var(--fl-rule-alpha-1), transparent);
+}
+/* stylelint-enable selector-class-pattern */
+
+body.firelight-heading-color-firelight {
+  --fl-heading-1: var(--fl-rose);
+  --fl-heading-2: var(--fl-ember);
+  --fl-heading-3: var(--fl-apricot);
+  --fl-heading-4: var(--fl-honey);
+  --fl-heading-5: var(--fl-verdigris);
+  --fl-heading-6: var(--fl-cornflower);
+}
+
+body.firelight-heading-color-custom {
+  --fl-heading-1: var(--fl-heading-1-custom);
+  --fl-heading-2: var(--fl-heading-2-custom);
+  --fl-heading-3: var(--fl-heading-3-custom);
+  --fl-heading-4: var(--fl-heading-4-custom);
+  --fl-heading-5: var(--fl-heading-5-custom);
+  --fl-heading-6: var(--fl-heading-6-custom);
+}
+
+.markdown-rendered,
+.markdown-source-view.mod-cm6 .cm-scroller {
+  font-variant-ligatures: common-ligatures;
+}
+
+.markdown-source-view.mod-cm6 .cm-scroller {
+  font-family: var(--fl-font-editor);
+  font-size: var(--fl-editor-font-size);
+  letter-spacing: var(--fl-editor-letter-spacing);
+}
+
+.markdown-rendered {
+  font-family: var(--font-text-theme);
+}
+
+.markdown-rendered p,
+.markdown-rendered li {
+  text-wrap: pretty;
+}
+
+.markdown-source-view.mod-cm6 .cm-formatting {
+  color: var(--text-faint);
+  font-size: 0.88em;
+  opacity: 0.52;
+}
+
+body.firelight-syntax-marks-clear .markdown-source-view.mod-cm6 .cm-formatting {
+  color: inherit;
+  font-size: inherit;
+  opacity: 1;
+}
+
+body.firelight-syntax-marks-minimal .markdown-source-view.mod-cm6 .cm-formatting {
+  color: var(--text-faint);
+  font-size: 0.76em;
+  opacity: 0.28;
+}
+
+/* Layout */
+
+body.firelight-density-compact {
+  --header-height: 36px;
+  --nav-item-padding: 2px var(--size-4-2) 2px var(--size-4-6);
+  --tab-font-size: var(--font-ui-smaller);
+  --file-header-font-size: var(--font-ui-smaller);
+}
+
+body.firelight-corner-crisp {
+  --radius-s: 2px;
+  --radius-m: 3px;
+  --radius-l: 4px;
+}
+
+body.firelight-corner-soft {
+  --radius-s: 3px;
+  --radius-m: 5px;
+  --radius-l: 8px;
+}
+
+body.firelight-corner-rounded {
+  --radius-s: 5px;
+  --radius-m: 8px;
+  --radius-l: 12px;
+}
+
+body.firelight-motion-normal {
+  --anim-duration-fast: var(--fl-motion-fast);
+  --anim-duration-moderate: var(--fl-motion-moderate);
+  --anim-duration-slow: var(--fl-motion-slow);
+}
+
+body.firelight-motion-reduced {
+  --anim-duration-fast: 80ms;
+  --anim-duration-moderate: 120ms;
+  --anim-duration-slow: 160ms;
+}
+
+body.firelight-motion-off {
+  --anim-duration-fast: 0ms;
+  --anim-duration-moderate: 0ms;
+  --anim-duration-slow: 0ms;
+}
+
+body:is(.firelight-property-layout-compact, .firelight-property-layout-minimal)
+  .metadata-container {
+  --input-height: 1.9em;
+}
+
+body.firelight-property-layout-compact .metadata-container {
+  --metadata-gap: var(--size-4-1);
+}
+
+body.firelight-property-layout-compact .metadata-property {
+  min-height: 1.9em;
+}
+
+body.firelight-property-layout-minimal .metadata-container {
+  --metadata-gap: 0;
+}
+
+body.firelight-property-layout-minimal
+  :is(.metadata-properties-heading, .metadata-property-icon) {
+  display: none;
+}
+
+body.firelight-property-layout-minimal .metadata-add-button {
+  opacity: 0;
+  transition: opacity var(--anim-duration-fast) ease;
+}
+
+body.firelight-property-layout-minimal
+  .metadata-container:is(:hover, :focus-within)
+  .metadata-add-button {
+  opacity: var(--fl-opacity-muted);
+}
+
+.metadata-property-value[data-property-type="tags"] .multi-select-pill {
+  line-height: 1.25;
+}
+
+body.firelight-focus-dim
+  .workspace-leaf:not(.mod-active)
+  :is(.view-header, .view-content) {
+  opacity: 0.68;
+  transition: opacity var(--anim-duration-fast) ease;
+}
+
+body.firelight-focus-dim
+  .workspace-leaf:not(.mod-active):hover
+  :is(.view-header, .view-content) {
+  opacity: 0.88;
+}
+
+body.firelight-focus-chrome
+  :is(.workspace-leaf.mod-active .view-header, .status-bar) {
+  opacity: 0.22;
+  transition: opacity var(--anim-duration-fast) ease;
+}
+
+body.firelight-focus-chrome
+  :is(
+    .workspace-leaf.mod-active:hover .view-header,
+    .workspace-leaf.mod-active:focus-within .view-header,
+    .status-bar:hover
+  ) {
+  opacity: 1;
+}
+
+/* Blockquotes */
+
+body.firelight-quote-surface-none {
+  --blockquote-background-color: transparent;
+}
+
+body.firelight-quote-surface-subtle {
+  --fl-quote-tint: var(--fl-tint-1);
+}
+
+body.firelight-quote-surface-medium {
+  --fl-quote-tint: var(--fl-tint-2);
+}
+
+body.firelight-quote-surface-strong {
+  --fl-quote-tint: var(--fl-tint-3);
+}
+
+body.firelight-quote-edge-none {
+  --fl-quote-rule: 0;
+}
+
+body.firelight-quote-edge-subtle {
+  --fl-quote-rule: var(--fl-rule-1);
+}
+
+body.firelight-quote-edge-medium {
+  --fl-quote-rule: var(--fl-rule-2);
+}
+
+body.firelight-quote-edge-strong {
+  --fl-quote-rule: var(--fl-rule-3);
+}
+
+/* Callouts */
+
+body.firelight-callout-color-standard {
+  --fl-callout-info: var(--fl-standard-info);
+  --fl-callout-positive: var(--fl-standard-positive);
+  --fl-callout-caution: var(--fl-standard-caution);
+  --fl-callout-critical: var(--fl-standard-critical);
+}
+
+body.firelight-callout-color-firelight {
+  --fl-callout-info: var(--fl-cornflower);
+  --fl-callout-positive: var(--fl-fern);
+  --fl-callout-caution: var(--fl-honey);
+  --fl-callout-critical: var(--fl-ember);
+}
+
+body.firelight-callout-color-custom {
+  --fl-callout-info: var(--fl-callout-info-custom);
+  --fl-callout-positive: var(--fl-callout-positive-custom);
+  --fl-callout-caution: var(--fl-callout-caution-custom);
+  --fl-callout-critical: var(--fl-callout-critical-custom);
+}
+
+body.firelight-callout-surface-none {
+  --fl-callout-tint: 0%;
+}
+
+body.firelight-callout-surface-subtle {
+  --fl-callout-tint: var(--fl-tint-1);
+}
+
+body.firelight-callout-surface-medium {
+  --fl-callout-tint: var(--fl-tint-2);
+}
+
+body.firelight-callout-surface-strong {
+  --fl-callout-tint: var(--fl-tint-3);
+}
+
+body.firelight-callout-edge-none {
+  --fl-callout-rule: 0;
+}
+
+body.firelight-callout-edge-subtle {
+  --fl-callout-rule: var(--fl-rule-1);
+}
+
+body.firelight-callout-edge-medium {
+  --fl-callout-rule: var(--fl-rule-2);
+}
+
+body.firelight-callout-edge-strong {
+  --fl-callout-rule: var(--fl-rule-3);
+}
+
+.callout {
+  border-width: 0;
+  border-inline-start: var(--fl-callout-rule) solid
+    color-mix(
+      in oklch,
+      var(--callout-color) var(--fl-rule-alpha-2),
+      transparent
+    );
+  background: color-mix(
+    in oklch,
+    var(--callout-color) var(--fl-callout-tint),
+    transparent
+  );
+  box-shadow: none;
+}
+
+/* Code blocks */
+
+body.firelight-code-wrap-on {
+  --code-white-space: pre-wrap;
+}
+
+body.firelight-code-wrap-off {
+  --code-white-space: pre;
+}
+
+/*
+ * Scrolling on the pre would carry the copy button along with the content,
+ * so the code element scrolls and the pre stays put as its positioning box.
+ */
+.markdown-rendered pre {
+  overflow-x: visible;
+}
+
+.markdown-rendered pre > code {
+  display: block;
+  overflow-x: auto;
+  white-space: var(--code-white-space);
+  overflow-wrap: normal;
+}
+
+body.firelight-code-wrap-on .markdown-rendered pre > code {
+  overflow-wrap: anywhere;
+}
+
+/* Active line */
+
+body.firelight-active-line-color-neutral {
+  --fl-active-line-tone: var(--fl-ink-1);
+}
+
+body.firelight-active-line-color-accent {
+  --fl-active-line-tone: var(--color-accent);
+}
+
+.markdown-source-view.mod-cm6 .cm-active.cm-line {
+  background: color-mix(
+    in oklch,
+    var(--fl-active-line-tone) var(--fl-tint-1),
+    transparent
+  );
+}
+
+body.firelight-active-line-indicator
+  .markdown-source-view.mod-cm6
+  .cm-active.cm-line {
+  background: transparent;
+  box-shadow: inset var(--fl-rule-2) 0
+    color-mix(
+      in oklch,
+      var(--fl-active-line-tone) var(--fl-rule-alpha-2),
+      transparent
+    );
+}
+
+body.firelight-active-line-none
+  .markdown-source-view.mod-cm6
+  .cm-active.cm-line {
+  background: transparent;
+}
+
+/* Images */
+
+:is(.markdown-rendered, .markdown-source-view.mod-cm6)
+  :is(.image-embed, img:not(.emoji)) {
+  max-width: 100%;
+  height: auto;
+}
+
+body.firelight-image-width-fill
+  :is(.markdown-rendered, .markdown-source-view.mod-cm6)
+  :is(.image-embed, img:not(.emoji)) {
+  width: 100%;
+}
+
+body.firelight-image-width-fill
+  :is(.markdown-rendered, .markdown-source-view.mod-cm6)
+  .image-embed
+  :is(.image-wrapper, img:not(.emoji)) {
+  width: 100%;
+}
+
+/* Links */
+
+body.firelight-link-internal-color-accent {
+  --fl-link-internal: var(--color-accent);
+}
+
+body.firelight-link-internal-color-rose {
+  --fl-link-internal: var(--fl-rose);
+}
+
+body.firelight-link-internal-color-ember {
+  --fl-link-internal: var(--fl-ember);
+}
+
+body.firelight-link-internal-color-coral {
+  --fl-link-internal: var(--fl-coral);
+}
+
+body.firelight-link-internal-color-apricot {
+  --fl-link-internal: var(--fl-apricot);
+}
+
+body.firelight-link-internal-color-honey {
+  --fl-link-internal: var(--fl-honey);
+}
+
+body.firelight-link-internal-color-fern {
+  --fl-link-internal: var(--fl-fern);
+}
+
+body.firelight-link-internal-color-verdigris {
+  --fl-link-internal: var(--fl-verdigris);
+}
+
+body.firelight-link-internal-color-cornflower {
+  --fl-link-internal: var(--fl-cornflower);
+}
+
+body.firelight-link-internal-color-lilac {
+  --fl-link-internal: var(--fl-lilac);
+}
+
+body.firelight-link-internal-color-orchid {
+  --fl-link-internal: var(--fl-orchid);
+}
+
+body.firelight-link-internal-color-custom {
+  --fl-link-internal: var(--fl-link-internal-custom);
+}
+
+body.firelight-link-external-color-match {
+  --fl-link-external: var(--fl-link-internal);
+}
+
+body.firelight-link-external-color-accent {
+  --fl-link-external: var(--color-accent);
+}
+
+body.firelight-link-external-color-rose {
+  --fl-link-external: var(--fl-rose);
+}
+
+body.firelight-link-external-color-ember {
+  --fl-link-external: var(--fl-ember);
+}
+
+body.firelight-link-external-color-coral {
+  --fl-link-external: var(--fl-coral);
+}
+
+body.firelight-link-external-color-apricot {
+  --fl-link-external: var(--fl-apricot);
+}
+
+body.firelight-link-external-color-honey {
+  --fl-link-external: var(--fl-honey);
+}
+
+body.firelight-link-external-color-fern {
+  --fl-link-external: var(--fl-fern);
+}
+
+body.firelight-link-external-color-verdigris {
+  --fl-link-external: var(--fl-verdigris);
+}
+
+body.firelight-link-external-color-cornflower {
+  --fl-link-external: var(--fl-cornflower);
+}
+
+body.firelight-link-external-color-lilac {
+  --fl-link-external: var(--fl-lilac);
+}
+
+body.firelight-link-external-color-orchid {
+  --fl-link-external: var(--fl-orchid);
+}
+
+body.firelight-link-external-color-custom {
+  --fl-link-external: var(--fl-link-external-custom);
+}
+
+body.firelight-link-hover-deepen {
+  --fl-link-internal-hover: oklch(
+    from var(--fl-link-internal)
+    calc(l + var(--fl-hover-lift))
+    calc(c * var(--fl-hover-chroma))
+    h
+  );
+  --fl-link-external-hover: oklch(
+    from var(--fl-link-external)
+    calc(l + var(--fl-hover-lift))
+    calc(c * var(--fl-hover-chroma))
+    h
+  );
+}
+
+body.firelight-link-hover-accent {
+  --fl-link-internal-hover: var(--color-accent);
+  --fl-link-external-hover: var(--color-accent);
+}
+
+body.firelight-link-hover-none {
+  --fl-link-internal-hover: var(--fl-link-internal);
+  --fl-link-external-hover: var(--fl-link-external);
+}
+
+body.firelight-link-underline-always {
+  --fl-link-underline: underline;
+  --fl-link-underline-hover: underline;
+}
+
+body.firelight-link-underline-hover {
+  --fl-link-underline: none;
+  --fl-link-underline-hover: underline;
+}
+
+body.firelight-link-underline-never {
+  --fl-link-underline: none;
+  --fl-link-underline-hover: none;
+}
+
+/*
+ * Obsidian's external mark is a fixed grey image. Redrawn as a mask so it can
+ * take a theme color, one step below body text so it reads as metadata.
+ * Scoped as Obsidian scopes it, since Live Preview has no .markdown-rendered.
+ */
+.external-link {
+  padding-inline-end: 0;
+  background-image: none;
+}
+
+.external-link::after {
+  display: inline-block;
+  width: 0.78em;
+  height: 0.78em;
+  margin-inline-start: 0.18em;
+  background-color: var(--fl-ink-3);
+  content: "";
+  mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M14 9 L3 9 3 29 23 29 23 18 M18 4 L28 4 28 14 M28 4 L14 18' stroke='black' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  vertical-align: -0.02em;
+}
+
+
+/* Lists and tasks */
+
+body.firelight-task-done-dim {
+  --checklist-done-decoration: none;
+}
+
+/*
+ * Obsidian marks every alternate task state as merely checked, so [/], [!] and
+ * the rest are indistinguishable. Each one gets its own mark and hue here.
+ */
+
+:is(
+  input[data-task="/"],
+  [data-task="/"] > input,
+  [data-task="/"] > p > input
+):checked {
+  border-color: var(--fl-apricot);
+  background-color: var(--fl-apricot);
+}
+
+:is(
+  input[data-task="/"],
+  [data-task="/"] > input,
+  [data-task="/"] > p > input
+):checked::after {
+  mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect x='0' y='0' width='12' height='24' fill='black'/></svg>");
+  mask-repeat: no-repeat;
+  mask-position: 50% 50%;
+  mask-size: 100%;
+}
+
+:is(
+  input[data-task="-"],
+  [data-task="-"] > input,
+  [data-task="-"] > p > input
+):checked {
+  border-color: var(--fl-ink-5);
+  background-color: var(--fl-ink-5);
+}
+
+:is(
+  input[data-task="-"],
+  [data-task="-"] > input,
+  [data-task="-"] > p > input
+):checked::after {
+  mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect x='4' y='10.5' width='16' height='3' rx='1.5' fill='black'/></svg>");
+  mask-repeat: no-repeat;
+  mask-position: 50% 50%;
+  mask-size: 65%;
+}
+
+:is(
+  input[data-task=">"],
+  [data-task=">"] > input,
+  [data-task=">"] > p > input
+):checked {
+  border-color: var(--fl-cornflower);
+  background-color: var(--fl-cornflower);
+}
+
+:is(
+  input[data-task=">"],
+  [data-task=">"] > input,
+  [data-task=">"] > p > input
+):checked::after {
+  mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M9 5l7 7-7 7' stroke='black' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  mask-repeat: no-repeat;
+  mask-position: 50% 50%;
+  mask-size: 65%;
+}
+
+:is(
+  input[data-task="<"],
+  [data-task="<"] > input,
+  [data-task="<"] > p > input
+):checked {
+  border-color: var(--fl-cornflower);
+  background-color: var(--fl-cornflower);
+}
+
+:is(
+  input[data-task="<"],
+  [data-task="<"] > input,
+  [data-task="<"] > p > input
+):checked::after {
+  mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M15 5l-7 7 7 7' stroke='black' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  mask-repeat: no-repeat;
+  mask-position: 50% 50%;
+  mask-size: 65%;
+}
+
+:is(
+  input[data-task="u"],
+  [data-task="u"] > input,
+  [data-task="u"] > p > input
+):checked {
+  border-color: var(--fl-fern);
+  background-color: var(--fl-fern);
+}
+
+:is(
+  input[data-task="u"],
+  [data-task="u"] > input,
+  [data-task="u"] > p > input
+):checked::after {
+  mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 20V5M5 12l7-7 7 7' stroke='black' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  mask-repeat: no-repeat;
+  mask-position: 50% 50%;
+  mask-size: 65%;
+}
+
+:is(
+  input[data-task="d"],
+  [data-task="d"] > input,
+  [data-task="d"] > p > input
+):checked {
+  border-color: var(--fl-rose);
+  background-color: var(--fl-rose);
+}
+
+:is(
+  input[data-task="d"],
+  [data-task="d"] > input,
+  [data-task="d"] > p > input
+):checked::after {
+  mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 4v15M5 12l7 7 7-7' stroke='black' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  mask-repeat: no-repeat;
+  mask-position: 50% 50%;
+  mask-size: 65%;
+}
+
+:is(
+  input[data-task="?"],
+  [data-task="?"] > input,
+  [data-task="?"] > p > input
+):checked::after,
+:is(
+  input[data-task="!"],
+  [data-task="!"] > input,
+  [data-task="!"] > p > input
+):checked::after,
+:is(
+  input[data-task="*"],
+  [data-task="*"] > input,
+  [data-task="*"] > p > input
+):checked::after,
+:is(
+  input[data-task="\""],
+  [data-task="\""] > input,
+  [data-task="\""] > p > input
+):checked::after,
+:is(
+  input[data-task="i"],
+  [data-task="i"] > input,
+  [data-task="i"] > p > input
+):checked::after,
+:is(
+  input[data-task="I"],
+  [data-task="I"] > input,
+  [data-task="I"] > p > input
+):checked::after,
+:is(
+  input[data-task="b"],
+  [data-task="b"] > input,
+  [data-task="b"] > p > input
+):checked::after,
+:is(
+  input[data-task="k"],
+  [data-task="k"] > input,
+  [data-task="k"] > p > input
+):checked::after,
+:is(
+  input[data-task="l"],
+  [data-task="l"] > input,
+  [data-task="l"] > p > input
+):checked::after,
+:is(
+  input[data-task="f"],
+  [data-task="f"] > input,
+  [data-task="f"] > p > input
+):checked::after,
+:is(
+  input[data-task="w"],
+  [data-task="w"] > input,
+  [data-task="w"] > p > input
+):checked::after,
+:is(
+  input[data-task="n"],
+  [data-task="n"] > input,
+  [data-task="n"] > p > input
+):checked::after,
+:is(
+  input[data-task="S"],
+  [data-task="S"] > input,
+  [data-task="S"] > p > input
+):checked::after,
+:is(
+  input[data-task="p"],
+  [data-task="p"] > input,
+  [data-task="p"] > p > input
+):checked::after,
+:is(
+  input[data-task="c"],
+  [data-task="c"] > input,
+  [data-task="c"] > p > input
+):checked::after {
+  display: grid;
+  background-color: transparent;
+  color: var(--checkbox-marker-color);
+  content: "";
+  font-family: var(--font-interface);
+  font-size: calc(var(--checkbox-size) * 0.74);
+  font-weight: 700;
+  line-height: 1;
+  mask-image: none;
+  place-items: center;
+}
+
+:is(
+  input[data-task="?"],
+  [data-task="?"] > input,
+  [data-task="?"] > p > input
+):checked {
+  border-color: var(--fl-honey);
+  background-color: var(--fl-honey);
+}
+
+:is(
+  input[data-task="?"],
+  [data-task="?"] > input,
+  [data-task="?"] > p > input
+):checked::after {
+  content: "?";
+}
+
+:is(
+  input[data-task="!"],
+  [data-task="!"] > input,
+  [data-task="!"] > p > input
+):checked {
+  border-color: var(--fl-ember);
+  background-color: var(--fl-ember);
+}
+
+:is(
+  input[data-task="!"],
+  [data-task="!"] > input,
+  [data-task="!"] > p > input
+):checked::after {
+  content: "!";
+}
+
+:is(
+  input[data-task="*"],
+  [data-task="*"] > input,
+  [data-task="*"] > p > input
+):checked {
+  border-color: var(--fl-honey);
+  background-color: var(--fl-honey);
+}
+
+:is(
+  input[data-task="*"],
+  [data-task="*"] > input,
+  [data-task="*"] > p > input
+):checked::after {
+  content: "★";
+}
+
+:is(
+  input[data-task="\""],
+  [data-task="\""] > input,
+  [data-task="\""] > p > input
+):checked {
+  border-color: var(--fl-verdigris);
+  background-color: var(--fl-verdigris);
+}
+
+:is(
+  input[data-task="\""],
+  [data-task="\""] > input,
+  [data-task="\""] > p > input
+):checked::after {
+  content: "”";
+}
+
+:is(
+  input[data-task="i"],
+  [data-task="i"] > input,
+  [data-task="i"] > p > input
+):checked {
+  border-color: var(--fl-cornflower);
+  background-color: var(--fl-cornflower);
+}
+
+:is(
+  input[data-task="i"],
+  [data-task="i"] > input,
+  [data-task="i"] > p > input
+):checked::after {
+  content: "i";
+}
+
+:is(
+  input[data-task="I"],
+  [data-task="I"] > input,
+  [data-task="I"] > p > input
+):checked {
+  border-color: var(--fl-honey);
+  background-color: var(--fl-honey);
+}
+
+:is(
+  input[data-task="I"],
+  [data-task="I"] > input,
+  [data-task="I"] > p > input
+):checked::after {
+  content: "I";
+}
+
+:is(
+  input[data-task="b"],
+  [data-task="b"] > input,
+  [data-task="b"] > p > input
+):checked {
+  border-color: var(--fl-orchid);
+  background-color: var(--fl-orchid);
+}
+
+:is(
+  input[data-task="b"],
+  [data-task="b"] > input,
+  [data-task="b"] > p > input
+):checked::after {
+  content: "b";
+}
+
+:is(
+  input[data-task="k"],
+  [data-task="k"] > input,
+  [data-task="k"] > p > input
+):checked {
+  border-color: var(--fl-honey);
+  background-color: var(--fl-honey);
+}
+
+:is(
+  input[data-task="k"],
+  [data-task="k"] > input,
+  [data-task="k"] > p > input
+):checked::after {
+  content: "k";
+}
+
+:is(
+  input[data-task="l"],
+  [data-task="l"] > input,
+  [data-task="l"] > p > input
+):checked {
+  border-color: var(--fl-coral);
+  background-color: var(--fl-coral);
+}
+
+:is(
+  input[data-task="l"],
+  [data-task="l"] > input,
+  [data-task="l"] > p > input
+):checked::after {
+  content: "l";
+}
+
+:is(
+  input[data-task="f"],
+  [data-task="f"] > input,
+  [data-task="f"] > p > input
+):checked {
+  border-color: var(--fl-ember);
+  background-color: var(--fl-ember);
+}
+
+:is(
+  input[data-task="f"],
+  [data-task="f"] > input,
+  [data-task="f"] > p > input
+):checked::after {
+  content: "f";
+}
+
+:is(
+  input[data-task="w"],
+  [data-task="w"] > input,
+  [data-task="w"] > p > input
+):checked {
+  border-color: var(--fl-honey);
+  background-color: var(--fl-honey);
+}
+
+:is(
+  input[data-task="w"],
+  [data-task="w"] > input,
+  [data-task="w"] > p > input
+):checked::after {
+  content: "w";
+}
+
+:is(
+  input[data-task="n"],
+  [data-task="n"] > input,
+  [data-task="n"] > p > input
+):checked {
+  border-color: var(--fl-ink-3);
+  background-color: var(--fl-ink-3);
+}
+
+:is(
+  input[data-task="n"],
+  [data-task="n"] > input,
+  [data-task="n"] > p > input
+):checked::after {
+  content: "n";
+}
+
+:is(
+  input[data-task="S"],
+  [data-task="S"] > input,
+  [data-task="S"] > p > input
+):checked {
+  border-color: var(--fl-fern);
+  background-color: var(--fl-fern);
+}
+
+:is(
+  input[data-task="S"],
+  [data-task="S"] > input,
+  [data-task="S"] > p > input
+):checked::after {
+  content: "$";
+}
+
+:is(
+  input[data-task="p"],
+  [data-task="p"] > input,
+  [data-task="p"] > p > input
+):checked {
+  border-color: var(--fl-fern);
+  background-color: var(--fl-fern);
+}
+
+:is(
+  input[data-task="p"],
+  [data-task="p"] > input,
+  [data-task="p"] > p > input
+):checked::after {
+  content: "+";
+}
+
+:is(
+  input[data-task="c"],
+  [data-task="c"] > input,
+  [data-task="c"] > p > input
+):checked {
+  border-color: var(--fl-rose);
+  background-color: var(--fl-rose);
+}
+
+:is(
+  input[data-task="c"],
+  [data-task="c"] > input,
+  [data-task="c"] > p > input
+):checked::after {
+  content: "×";
+}
+
+/* stylelint-disable selector-class-pattern -- Obsidian editor class */
+li.task-list-item[data-task="-"],
+.HyperMD-task-line[data-task="-"] {
+  color: var(--checklist-done-color);
+  text-decoration: line-through;
+}
+/* stylelint-enable selector-class-pattern */
+
+/* Note embeds */
+
+body.firelight-embed-layout-panel {
+  --embed-background: color-mix(
+    in oklch,
+    var(--fl-ink-1) var(--fl-tint-2),
+    var(--fl-surface-1)
+  );
+}
+
+body.firelight-embed-layout-box {
+  --embed-background: transparent;
+}
+
+.markdown-embed {
+  position: relative;
+  box-sizing: border-box;
+  max-width: 100%;
+  padding-inline: 0;
+  border: 0;
+  border-radius: var(--radius-m);
+  background: transparent;
+}
+
+body:is(.firelight-embed-layout-panel, .firelight-embed-layout-box) .markdown-embed {
+  padding: var(--size-4-3) var(--size-4-4);
+  background: var(--embed-background);
+}
+
+body.firelight-embed-layout-box .markdown-embed {
+  border: var(--fl-rule-1) solid var(--background-modifier-border-hover);
+}
+
+.markdown-embed > .markdown-embed-title {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: 0.35rem;
+  inset-inline-end: 2rem;
+  overflow: hidden;
+  max-width: 60%;
+  padding: 0.24em 0.5em;
+  border-radius: var(--radius-s);
+  background: var(--background-primary-alt);
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  line-height: 1.3;
+  pointer-events: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.markdown-embed :is(.markdown-embed-title, .markdown-embed-link) {
+  opacity: 0;
+  transition: opacity var(--anim-duration-fast) ease;
+}
+
+.markdown-embed:is(:hover, :focus-within)
+  :is(.markdown-embed-title, .markdown-embed-link) {
+  opacity: var(--fl-opacity-muted);
+}
+
+body.firelight-embed-label-always
+  .markdown-embed
+  :is(.markdown-embed-title, .markdown-embed-link) {
+  opacity: var(--fl-opacity-muted);
+}
+
+body.firelight-embed-label-hidden
+  :is(.markdown-embed-title, .markdown-embed-link) {
+  display: none;
+}
+
+/* Tables */
+
+:is(.markdown-rendered, .markdown-source-view.mod-cm6) table {
+  border-collapse: collapse;
+}
+
+:is(.markdown-rendered, .markdown-source-view.mod-cm6) :is(th, td) {
+  border: 0;
+}
+
+:is(.markdown-rendered, .markdown-source-view.mod-cm6) thead tr {
+  border-block-end: var(--fl-rule-1) solid var(--fl-surface-3);
+}
+
+body.firelight-table-border-none
+  :is(.markdown-rendered, .markdown-source-view.mod-cm6)
+  thead
+  tr {
+  border-block-end: 0;
+}
+
+body.firelight-table-border-row
+  :is(.markdown-rendered, .markdown-source-view.mod-cm6)
+  tbody
+  tr {
+  border-block-end: var(--fl-rule-1) solid var(--fl-surface-3);
+}
+
+body.firelight-table-border-column
+  :is(.markdown-rendered, .markdown-source-view.mod-cm6)
+  thead
+  tr {
+  border-block-end: 0;
+}
+
+body.firelight-table-border-column
+  :is(.markdown-rendered, .markdown-source-view.mod-cm6)
+  :is(th, td):not(:last-child) {
+  border-inline-end: var(--fl-rule-1) solid var(--fl-surface-3);
+}
+
+body.firelight-table-border-grid
+  :is(.markdown-rendered, .markdown-source-view.mod-cm6)
+  :is(th, td) {
+  border: var(--fl-rule-1) solid var(--fl-surface-3);
+}
+
+body.firelight-table-stripe {
+  --table-row-alt-background: color-mix(
+    in oklch,
+    var(--fl-ink-1) var(--fl-tint-1),
+    transparent
+  );
+}
+
+:is(
+    .markdown-preview-sizer > .el-table,
+    .markdown-source-view.mod-cm6 .cm-table-widget
+  ) {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+body.firelight-table-width-fill
+  :is(
+    .markdown-preview-sizer > .el-table,
+    .markdown-source-view.mod-cm6 .cm-table-widget
+  ) {
+  width: 100%;
+}
+
+body.firelight-table-width-fill
+  :is(
+    .markdown-preview-sizer > .el-table > table,
+    .markdown-source-view.mod-cm6 .cm-table-widget table,
+    .markdown-source-view.mod-cm6 .cm-table-widget .table-wrapper
+  ) {
+  width: 100%;
+  min-width: 100%;
+}
+
+/* Tags */
+
+body.firelight-tag-surface-none {
+  --tag-background: transparent;
+  --tag-background-hover: transparent;
+  --tag-border-color: transparent;
+  --tag-border-color-hover: transparent;
+  --tag-color: var(--color-accent);
+}
+
+body.firelight-tag-surface-subtle {
+  --fl-tag-tint: var(--fl-tint-1);
+}
+
+body.firelight-tag-surface-medium {
+  --fl-tag-tint: var(--fl-tint-2);
+}
+
+body.firelight-tag-shape-corner {
+  --tag-radius: var(--radius-s);
+}
+
+body.firelight-tag-shape-pill {
+  --tag-radius: 999px;
+}
+
+/* Interface chrome */
+
+.markdown-rendered kbd {
+  padding: 0.1em 0.38em;
+  border: var(--fl-rule-1) solid var(--background-modifier-border-hover);
+  border-bottom-width: var(--fl-rule-2);
+  border-radius: var(--radius-s);
+  background: var(--background-primary-alt);
+  color: var(--text-normal);
+  font-family: var(--font-monospace);
+  font-size: var(--font-smaller);
+}
+
+.cm-searching {
+  /* Obsidian hardcodes this to pure yellow. */
+  background-color: color-mix(
+    in oklch,
+    var(--color-accent) var(--fl-wash-2),
+    transparent
+  );
+}
+
+.menu,
+.suggestion-container,
+.popover {
+  border: 0;
+  box-shadow: var(--fl-shadow-floating);
+}
+
+/* Style Settings panel */
+
+/* A live swatch beside each color dropdown. */
+.style-settings-container
+  :is(
+    [data-id="firelight-accent"],
+    [data-id="firelight-highlight"],
+    [data-id="firelight-link-internal-color"],
+    [data-id="firelight-link-external-color"],
+    [data-id="firelight-callout-color"]
+  )
+  .setting-item-control::before {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 0.72em;
+  height: 0.72em;
+  margin-inline-end: 0.5em;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--background-modifier-border-hover);
+  content: "";
+}
+
+.style-settings-container
+  [data-id="firelight-accent"]
+  .setting-item-control::before {
+  background: var(--fl-accent);
+}
+
+.style-settings-container
+  [data-id="firelight-highlight"]
+  .setting-item-control::before {
+  background: var(--fl-highlight);
+}
+
+.style-settings-container
+  [data-id="firelight-link-internal-color"]
+  .setting-item-control::before {
+  background: var(--fl-link-internal);
+}
+
+.style-settings-container
+  [data-id="firelight-link-external-color"]
+  .setting-item-control::before {
+  background: var(--fl-link-external);
+}
+
+.style-settings-container
+  [data-id="firelight-callout-color"]
+  .setting-item-control::before {
+  background: conic-gradient(
+    from -45deg,
+    var(--fl-callout-info) 0 25%,
+    var(--fl-callout-positive) 25% 50%,
+    var(--fl-callout-caution) 50% 75%,
+    var(--fl-callout-critical) 75% 100%
+  );
+}
+
+/* Rows that do not apply to the current selection. */
+body:not(.firelight-accent-custom)
+  .style-settings-container
+  [data-id="fl-accent-custom"],
+body:not(.firelight-highlight-custom)
+  .style-settings-container
+  [data-id="fl-highlight-custom"],
+body:not(.firelight-link-internal-color-custom)
+  .style-settings-container
+  [data-id="fl-link-internal-custom"],
+body:not(.firelight-link-external-color-custom)
+  .style-settings-container
+  [data-id="fl-link-external-custom"],
+body.firelight-tag-surface-none
+  .style-settings-container
+  [data-id="firelight-tag-shape"],
+body.firelight-active-line-none
+  .style-settings-container
+  [data-id="firelight-active-line-color"] {
+  display: none;
+}
+
+body:not(.firelight-callout-color-custom)
+  .style-settings-container
+  :is(
+    [data-id="fl-callout-info-custom"],
+    [data-id="fl-callout-positive-custom"],
+    [data-id="fl-callout-caution-custom"],
+    [data-id="fl-callout-critical-custom"]
+  ) {
+  display: none;
+}
+
+body:not(.firelight-heading-color-custom)
+  .style-settings-container
+  :is(
+    [data-id="fl-heading-1-custom"],
+    [data-id="fl-heading-2-custom"],
+    [data-id="fl-heading-3-custom"],
+    [data-id="fl-heading-4-custom"],
+    [data-id="fl-heading-5-custom"],
+    [data-id="fl-heading-6-custom"]
+  ) {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    --anim-duration-fast: 0ms;
+    --anim-duration-moderate: 0ms;
+    --anim-duration-slow: 0ms;
+  }
+}

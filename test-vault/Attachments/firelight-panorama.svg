@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="700" viewBox="0 0 2400 700" role="img" aria-labelledby="title description">
+  <title id="title">Firelight panorama width test</title>
+  <desc id="description">A wide test card divided into measured sections for comparing note, wide, and pane widths.</desc>
+  <rect width="2400" height="700" fill="#232222"/>
+  <path d="M0 0H800V700H0z" fill="#69974a" opacity="0.54"/>
+  <path d="M800 0H1600V700H800z" fill="#a1884b" opacity="0.54"/>
+  <path d="M1600 0H2400V700H1600z" fill="#6387c9" opacity="0.54"/>
+  <g fill="none" stroke="#eae2dc" stroke-opacity="0.32" stroke-width="3">
+    <path d="M40 40H2360V660H40z"/>
+    <path d="M200 0V700M400 0V700M600 0V700M800 0V700M1000 0V700M1200 0V700M1400 0V700M1600 0V700M1800 0V700M2000 0V700M2200 0V700"/>
+  </g>
+  <g fill="#f4eeec" font-family="sans-serif" font-size="56" font-weight="700" text-anchor="middle">
+    <text x="400" y="330">NOTE</text>
+    <text x="1200" y="330">WIDE</text>
+    <text x="2000" y="330">PANE</text>
+  </g>
+  <text x="1200" y="420" fill="#eae2dc" font-family="monospace" font-size="34" text-anchor="middle">PANORAMA · 2400 × 700</text>
+  <text x="70" y="620" fill="#f1ddad" font-family="monospace" font-size="28">LEFT EDGE</text>
+  <text x="2330" y="620" fill="#f1ddad" font-family="monospace" font-size="28" text-anchor="end">RIGHT EDGE</text>
+</svg>

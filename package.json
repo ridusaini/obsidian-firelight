@@ -1,0 +1,20 @@
+{
+  "name": "obsidian-firelight",
+  "version": "1.0.0",
+  "description": "Build tooling for the Firelight theme for Obsidian.",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ridusaini/obsidian-firelight.git"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "lint": "npm run build && stylelint \"theme.css\""
+  },
+  "devDependencies": {
+    "stylelint": "^17.0.0",
+    "stylelint-config-obsidianmd": "^0.1.0"
+  }
+}

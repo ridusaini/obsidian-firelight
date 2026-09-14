@@ -1,0 +1,30 @@
+name: Report a problem
+description: Something in the theme is not rendering correctly
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: What did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: How can we reproduce it?
+      description: Include the note content or a minimal example, and a screenshot if helpful.
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Obsidian version and palette
+      description: The Obsidian version, and whether you are on Ash, Smoulder, or Coal.
+      placeholder: 1.13.7, Smoulder
+    validations:
+      required: true
+  - type: input
+    id: settings
+    attributes:
+      label: Relevant settings
+      description: Any Style Settings options that differ from the defaults.

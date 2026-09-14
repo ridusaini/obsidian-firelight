@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title description">
+  <title id="title">Firelight landscape width test</title>
+  <desc id="description">A warm landscape test card with a grid and labelled edges.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2e2e2e"/>
+      <stop offset="1" stop-color="#473e36"/>
+    </linearGradient>
+    <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+      <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#d7cec8" stroke-opacity="0.12" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="900" fill="url(#background)"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+  <rect x="32" y="32" width="1536" height="836" rx="18" fill="none" stroke="#f1ddad" stroke-width="4"/>
+  <circle cx="800" cy="450" r="180" fill="#b83f5f" opacity="0.72"/>
+  <circle cx="675" cy="395" r="105" fill="#e07a57" opacity="0.72"/>
+  <circle cx="925" cy="505" r="105" fill="#6387c9" opacity="0.72"/>
+  <text x="80" y="120" fill="#f1ddad" font-family="monospace" font-size="42">LEFT EDGE</text>
+  <text x="1520" y="120" fill="#f1ddad" font-family="monospace" font-size="42" text-anchor="end">RIGHT EDGE</text>
+  <text x="800" y="760" fill="#eae2dc" font-family="sans-serif" font-size="70" font-weight="700" text-anchor="middle">LANDSCAPE · 1600 × 900</text>
+  <text x="800" y="820" fill="#d7cec8" font-family="monospace" font-size="30" text-anchor="middle">Use the outer rule to check pane insets</text>
+</svg>

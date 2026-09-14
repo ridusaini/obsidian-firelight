@@ -1,6 +1,6 @@
 # Firelight
 
-A warm, quiet theme for [Obsidian](https://obsidian.md), built on the [Firelight palette](https://github.com/ridusaini/firelight).
+A quiet theme for long reading and writing, built on the [Firelight palette](https://github.com/ridusaini/firelight). Most of it can be adjusted using [Style Settings](https://github.com/mgmeyers/obsidian-style-settings).
 
 ![Coal, Smoulder and Ash](assets/artwork_01.png)
 
@@ -12,7 +12,7 @@ A warm, quiet theme for [Obsidian](https://obsidian.md), built on the [Firelight
 - Quiet markdown formatting marks, with three levels of restraint
 - Callouts, blockquotes, tags and tables with adjustable surfaces and edges
 - Heading scale, heading colors and optional dividers
-- Separate colors for internal and external links
+- Internal and external links can take separate colors
 - Twenty-one task states, each with its own glyph and hue
 - Focus options that dim inactive panes and fade the interface until you reach for it
 - 53 settings in 13 flat sections, no submenus to dig through
@@ -21,7 +21,7 @@ A warm, quiet theme for [Obsidian](https://obsidian.md), built on the [Firelight
 
 ## Recommended plugins
 
-- [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) - unlocks every option above. Firelight looks right without it, but this is how you change anything.
+- [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) - Firelight looks right without it, but this is how everything above is adjusted.
 
 ![The Firelight section of Style Settings](assets/artwork_02.png)
 

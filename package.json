@@ -1,6 +1,6 @@
 {
   "name": "obsidian-firelight",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Build tooling for the Firelight theme for Obsidian.",
   "license": "MIT",
   "private": true,

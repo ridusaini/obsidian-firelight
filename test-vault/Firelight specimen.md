@@ -22,7 +22,7 @@ Three palettes ship with the theme. Obsidian's light and dark switch chooses **A
 
 ## Reading
 
-Text should hold its measure without crowding the pane. An [[Internal link]] and an [[Unresolved note]] sit differently in a sentence, as does [an external address](https://obsidian.md). ==Highlighted text== marks a phrase, `inline code` interrupts it, and ~~deleted text~~ stays legible while reading as withdrawn.
+Text should hold its measure without crowding the pane. An [[Internal link]] and an [[Unresolved note]] sit differently in a sentence, as does [an external address](https://obsidian.md). ==Highlighted text== marks a phrase, `inline code` interrupts it, ~~deleted text~~ stays legible while reading as withdrawn and **Bold Text** carries weight.
 
 > Good tools become quiet in use. Their structure stays visible without asking for attention.
 

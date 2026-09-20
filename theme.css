@@ -66,13 +66,13 @@ settings:
   -
     id: firelight-accent
     title: Accent
-    description: Follow Obsidian's accent, choose a Firelight preset, or set a custom color.
+    description: Default uses Rose or your Obsidian Appearance accent. Presets and Custom override it.
     type: class-select
     allowEmpty: false
     default: firelight-accent-obsidian
     options:
       -
-        label: Obsidian accent
+        label: Default
         value: firelight-accent-obsidian
       -
         label: Rose
@@ -173,14 +173,14 @@ settings:
   -
     id: firelight-typography
     title: Typography
-    description: How note text is set, including headings and markdown syntax.
+    description: Fonts, spacing, headings, emphasis, and Markdown syntax.
     type: heading
     level: 1
     collapsed: true
   -
     id: firelight-font-editor
-    title: Editor font
-    description: Use Hanken Grotesk for a clean layout or Space Mono for a typewriter feel.
+    title: Default editor font
+    description: Use Hanken Grotesk or Space Mono when no Text font is selected in Obsidian's Appearance settings.
     type: class-select
     allowEmpty: false
     default: firelight-font-editor-sans
@@ -304,7 +304,7 @@ settings:
     default-dark: '#b5b6b9'
   -
     id: firelight-emphasis-color
-    title: Emphasis
+    title: Emphasis color
     description: The color of bold and italic text.
     type: class-select
     allowEmpty: false
@@ -318,21 +318,35 @@ settings:
         value: firelight-emphasis-color-accent
   -
     id: firelight-syntax-marks
-    title: Formatting marks
-    description: The visual weight of markdown syntax in Live Preview.
+    title: Syntax color
+    description: The color of Markdown symbols around emphasis, links, and headings while editing.
     type: class-select
     allowEmpty: false
     default: firelight-syntax-marks-quiet
     options:
       -
-        label: Clear
-        value: firelight-syntax-marks-clear
-      -
-        label: Quiet
+        label: Muted
         value: firelight-syntax-marks-quiet
       -
-        label: Minimal
+        label: Faint
         value: firelight-syntax-marks-minimal
+      -
+        label: Accent
+        value: firelight-syntax-marks-accent
+  -
+    id: firelight-syntax-typography
+    title: Syntax size
+    description: The size of inline Markdown symbols in Live Preview.
+    type: class-select
+    allowEmpty: false
+    default: firelight-syntax-typography-native
+    options:
+      -
+        label: Native
+        value: firelight-syntax-typography-native
+      -
+        label: Smaller
+        value: firelight-syntax-typography-small
   -
     id: firelight-layout
     title: Layout
@@ -345,7 +359,7 @@ settings:
     title: Line length
     description: Applies when Obsidian's readable line length is on. Turn that off for full-pane notes.
     type: variable-number-slider
-    default: 56
+    default: 44
     min: 36
     max: 96
     step: 1
@@ -370,7 +384,7 @@ settings:
     description: The shape of cards, callouts, menus, tabs, and inputs.
     type: class-select
     allowEmpty: false
-    default: firelight-corner-crisp
+    default: firelight-corner-soft
     options:
       -
         label: Crisp
@@ -384,7 +398,7 @@ settings:
   -
     id: firelight-motion
     title: Motion
-    description: The system reduced-motion preference always disables animation.
+    description: The system reduced-motion preference always disables Firelight's transitions.
     type: class-select
     allowEmpty: false
     default: firelight-motion-normal
@@ -407,7 +421,7 @@ settings:
     default: firelight-property-layout-default
     options:
       -
-        label: Default
+        label: Native
         value: firelight-property-layout-default
       -
         label: Compact
@@ -418,13 +432,13 @@ settings:
   -
     id: firelight-focus-dim
     title: Dim inactive panes
-    description: Fades every pane except the one you are working in.
+    description: Fades inactive panes until hovered or keyboard-focused. Fading is disabled on devices without hover.
     type: class-toggle
     default: false
   -
     id: firelight-focus-chrome
     title: Reduce active-pane chrome
-    description: Fades the tab header and status bar until you hover them.
+    description: Fades the tab header and status bar until hovered or keyboard-focused. Fading is disabled on devices without hover.
     type: class-toggle
     default: false
   -
@@ -436,7 +450,7 @@ settings:
   -
     id: firelight-quote-surface
     title: Surface
-    description: A surface and an edge can be used together.
+    description: The strength of the background tint.
     type: class-select
     allowEmpty: false
     default: firelight-quote-surface-subtle
@@ -455,8 +469,8 @@ settings:
         value: firelight-quote-surface-strong
   -
     id: firelight-quote-edge
-    title: Edge
-    description: Thickness of the rule down the inside edge.
+    title: Border thickness
+    description: The thickness of the border beside the text.
     type: class-select
     allowEmpty: false
     default: firelight-quote-edge-medium
@@ -465,13 +479,13 @@ settings:
         label: None
         value: firelight-quote-edge-none
       -
-        label: Subtle
+        label: Thin
         value: firelight-quote-edge-subtle
       -
         label: Medium
         value: firelight-quote-edge-medium
       -
-        label: Strong
+        label: Thick
         value: firelight-quote-edge-strong
   -
     id: firelight-callouts
@@ -482,7 +496,7 @@ settings:
   -
     id: firelight-callout-surface
     title: Surface
-    description: A surface and an edge can be used together.
+    description: The strength of the background tint.
     type: class-select
     allowEmpty: false
     default: firelight-callout-surface-subtle
@@ -501,8 +515,8 @@ settings:
         value: firelight-callout-surface-strong
   -
     id: firelight-callout-edge
-    title: Edge
-    description: Thickness of the rule down the inside edge.
+    title: Border thickness
+    description: The thickness of the border beside the text.
     type: class-select
     allowEmpty: false
     default: firelight-callout-edge-none
@@ -511,13 +525,13 @@ settings:
         label: None
         value: firelight-callout-edge-none
       -
-        label: Subtle
+        label: Thin
         value: firelight-callout-edge-subtle
       -
         label: Medium
         value: firelight-callout-edge-medium
       -
-        label: Strong
+        label: Thick
         value: firelight-callout-edge-strong
   -
     id: firelight-callout-color
@@ -614,7 +628,7 @@ settings:
   -
     id: firelight-active-line-color
     title: Color
-    description: Neutral keeps the mark quiet; accent makes it a cursor beacon.
+    description: Use a neutral mark or the accent color.
     type: class-select
     allowEmpty: false
     default: firelight-active-line-color-neutral
@@ -634,7 +648,7 @@ settings:
   -
     id: firelight-image-width
     title: Width
-    description: Fit keeps the image's own size, up to the note width. Fill stretches it to the note width.
+    description: Fit keeps the image's own size, up to the note width. Fill stretches unsized content images. Explicit dimensions are preserved.
     type: class-select
     allowEmpty: false
     default: firelight-image-width-fit
@@ -777,7 +791,7 @@ settings:
     default-dark: '#98b7ec'
   -
     id: firelight-link-hover
-    title: Hover
+    title: Hover color
     description: Applies to both link types.
     type: class-select
     allowEmpty: false
@@ -799,6 +813,40 @@ settings:
     level: 1
     collapsed: true
   -
+    id: firelight-list-marker-color
+    title: Bullet and number color
+    description: The color of bullets and numbers in lists.
+    type: class-select
+    allowEmpty: false
+    default: firelight-list-marker-color-faint
+    options:
+      -
+        label: Muted
+        value: firelight-list-marker-color-muted
+      -
+        label: Faint
+        value: firelight-list-marker-color-faint
+      -
+        label: Accent
+        value: firelight-list-marker-color-accent
+  -
+    id: firelight-list-marker-size
+    title: Bullet and number size
+    description: The size of bullets and numbers in lists. Task markers keep their normal size.
+    type: class-select
+    allowEmpty: false
+    default: firelight-list-marker-size-native
+    options:
+      -
+        label: Native
+        value: firelight-list-marker-size-native
+      -
+        label: Smaller
+        value: firelight-list-marker-size-small
+      -
+        label: Larger
+        value: firelight-list-marker-size-large
+  -
     id: fl-list-spacing
     title: List spacing
     description: Vertical space between list items.
@@ -811,7 +859,7 @@ settings:
   -
     id: firelight-task-done
     title: Completed tasks
-    description: Completed items are always dimmed; this adds the strike.
+    description: Keep completed items dimmed or add a line through the text.
     type: class-select
     allowEmpty: false
     default: firelight-task-done-strike
@@ -920,7 +968,7 @@ settings:
   -
     id: firelight-tag-surface
     title: Surface
-    description: How strongly the tag background is tinted.
+    description: The strength of the background tint.
     type: class-select
     allowEmpty: false
     default: firelight-tag-surface-subtle
@@ -934,16 +982,19 @@ settings:
       -
         label: Medium
         value: firelight-tag-surface-medium
+      -
+        label: Strong
+        value: firelight-tag-surface-strong
   -
     id: firelight-tag-shape
     title: Shape
-    description: Corner shape of the tag background.
+    description: Use the theme's corners or a pill shape.
     type: class-select
     allowEmpty: false
     default: firelight-tag-shape-corner
     options:
       -
-        label: Corners
+        label: Match corners
         value: firelight-tag-shape-corner
       -
         label: Pill
@@ -954,10 +1005,7 @@ settings:
 /* Scales and defaults */
 
 body {
-  /*
-   * Mix percentages. 6% suggests, 10% distinguishes, 14% emphasizes.
-   * Washes sit behind text and so run stronger than surface tints.
-   */
+  /* Surface tints, text highlights, and border opacity. */
   --fl-tint-1: 6%;
   --fl-tint-2: 10%;
   --fl-tint-3: 14%;
@@ -983,17 +1031,15 @@ body {
   --fl-font-mono: "Space Mono", "SFMono-Regular", consolas, "Liberation Mono",
     monospace;
   --fl-font-editor: var(--fl-font-sans);
-  --fl-line-length: 56rem;
-  --fl-line-length-cap: 92%;
+  --fl-line-length: 44rem;
   --fl-line-height: 1.68;
   --fl-list-spacing: 0.075em;
-  --fl-editor-font-size: 1em;
-  --fl-editor-letter-spacing: 0;
 
-  /* Color choices. The option classes further down replace these. */
+  /* Color defaults */
   --fl-accent: hsl(var(--accent-h) var(--accent-s) var(--accent-l));
   --fl-highlight: var(--fl-honey);
   --fl-active-line-tone: var(--fl-ink-1);
+  --fl-syntax-color: var(--text-muted);
   --fl-callout-info: var(--fl-cornflower);
   --fl-callout-positive: var(--fl-fern);
   --fl-callout-caution: var(--fl-honey);
@@ -1018,7 +1064,7 @@ body {
   --fl-link-underline: none;
   --fl-link-underline-hover: underline;
 
-  /* Component strengths. The option classes further down replace these. */
+  /* Surface and border defaults */
   --fl-quote-tint: var(--fl-tint-1);
   --fl-quote-rule: var(--fl-rule-2);
   --fl-callout-tint: var(--fl-tint-1);
@@ -1034,7 +1080,7 @@ body {
   --anim-duration-slow: var(--fl-motion-slow);
 
   /* Obsidian: measure and rhythm */
-  --file-line-width: min(var(--fl-line-length), var(--fl-line-length-cap));
+  --file-line-width: var(--fl-line-length);
   --line-height-normal: var(--fl-line-height);
   --line-height-tight: 1.35;
   --list-spacing: var(--fl-list-spacing);
@@ -1042,9 +1088,9 @@ body {
   --heading-spacing: calc(var(--p-spacing) * 2.1);
 
   /* Obsidian: radii */
-  --radius-s: 2px;
-  --radius-m: 3px;
-  --radius-l: 4px;
+  --radius-s: 3px;
+  --radius-m: 5px;
+  --radius-l: 8px;
   --input-radius: var(--radius-s);
   --tab-radius-active: var(--radius-s);
   --checkbox-radius: var(--radius-s);
@@ -1053,6 +1099,9 @@ body {
   --bases-cards-radius: var(--radius-m);
   --image-radius: var(--radius-m);
   --code-radius: var(--radius-s);
+  --metadata-property-radius: var(--radius-s);
+  --metadata-property-radius-hover: var(--radius-s);
+  --metadata-property-radius-focus: var(--radius-s);
   --toggle-radius: 999px;
   --toggle-thumb-radius: 999px;
   --slider-thumb-radius: 999px;
@@ -1086,6 +1135,14 @@ body {
   --callout-border-width: 0;
   --callout-radius: var(--radius-m);
   --callout-padding: var(--size-4-3) var(--size-4-4);
+  --code-white-space: pre-wrap;
+  --embed-border-start: none;
+  --embed-border-end: none;
+  --embed-border-top: none;
+  --embed-border-bottom: none;
+  --embed-padding: 0;
+  --menu-border-width: 0;
+  --menu-shadow: var(--fl-shadow-floating);
 
   -webkit-font-smoothing: antialiased;
 }
@@ -1110,6 +1167,11 @@ body {
   --fl-ink-1: #473e36;
   --fl-ink-0: #3a3129;
   --fl-rose: #b83f5f;
+
+  /* Rose in native accent channels. Appearance overrides these inline. */
+  --accent-h: 344.1322;
+  --accent-s: 48.9879%;
+  --accent-l: 48.4314%;
   --fl-ember: #c7504f;
   --fl-coral: #c86746;
   --fl-apricot: #be7c45;
@@ -1144,6 +1206,9 @@ body {
   --fl-ink-1: #d7cec8;
   --fl-ink-0: #eae2dc;
   --fl-rose: #dd7b8f;
+  --accent-h: 347.7551;
+  --accent-s: 59.0361%;
+  --accent-l: 67.451%;
   --fl-ember: #eb8b86;
   --fl-coral: #ed9d83;
   --fl-apricot: #f1bb90;
@@ -1173,6 +1238,9 @@ body {
   --fl-ink-1: #e6d7cd;
   --fl-ink-0: #f8eae0;
   --fl-rose: #f06b8a;
+  --accent-h: 346.015;
+  --accent-s: 81.5951%;
+  --accent-l: 68.0392%;
   --fl-ember: #ff7c78;
   --fl-coral: #ff936f;
   --fl-apricot: #ffb57a;
@@ -1300,11 +1368,7 @@ body {
   --interactive-normal: var(--fl-surface-2);
   --interactive-hover: var(--fl-surface-3);
   --interactive-accent: var(--color-accent);
-  --interactive-accent-hover: oklch(
-    from var(--color-accent) calc(l + var(--fl-hover-lift))
-    calc(c * var(--fl-hover-chroma))
-    h
-  );
+  --interactive-accent-hover: var(--text-accent-hover);
 
   /* Window and workspace */
   --titlebar-background: var(--fl-surface-0);
@@ -1426,7 +1490,7 @@ body {
   --checkbox-border-color-hover: var(--color-accent);
   --checklist-done-color: var(--fl-ink-5);
 
-  /* Callouts, mapping Obsidian's fourteen slots onto four roles */
+  /* Callout roles */
   --callout-default: var(--fl-callout-info);
   --callout-info: var(--fl-callout-info);
   --callout-summary: var(--fl-callout-info);
@@ -1587,20 +1651,12 @@ body.firelight-highlight-custom {
 
 body.firelight-font-editor-sans {
   --fl-font-editor: var(--fl-font-sans);
-  --fl-editor-font-size: 1em;
-  --fl-editor-letter-spacing: 0;
 }
 
 body.firelight-font-editor-mono {
   --fl-font-editor: var(--fl-font-mono);
-  --fl-editor-font-size: 0.96em;
-  --fl-editor-letter-spacing: -0.012em;
 }
 
-/*
- * Each scale decays toward 1.0 rather than holding one ratio, so h5 and h6
- * converge on body size instead of continuing a geometric run.
- */
 body.firelight-heading-scale-compact {
   --heading-spacing: calc(var(--p-spacing) * 1.7);
   --h1-size: 1.62em;
@@ -1685,13 +1741,12 @@ body.firelight-heading-color-custom {
 }
 
 .markdown-source-view.mod-cm6 .cm-scroller {
-  font-family: var(--fl-font-editor);
-  font-size: var(--fl-editor-font-size);
-  letter-spacing: var(--fl-editor-letter-spacing);
+  /* Keep the native Text font preference ahead of the editor-only default. */
+  font-family: var(--font-text-override), var(--fl-font-editor), var(--font-default);
 }
 
 .markdown-rendered {
-  font-family: var(--font-text-theme);
+  font-family: var(--font-text);
 }
 
 .markdown-rendered p,
@@ -1699,22 +1754,38 @@ body.firelight-heading-color-custom {
   text-wrap: pretty;
 }
 
-.markdown-source-view.mod-cm6 .cm-formatting {
-  color: var(--text-faint);
+body.firelight-syntax-marks-minimal {
+  --fl-syntax-color: var(--text-faint);
+}
+
+body.firelight-syntax-marks-accent {
+  --fl-syntax-color: var(--color-accent);
+}
+
+/* Keep hidden tokens and editor controls out of syntax styling. */
+body
+  .markdown-source-view.mod-cm6
+  .cm-formatting:is(
+    .cm-formatting-em,
+    .cm-formatting-strong,
+    .cm-formatting-strikethrough,
+    .cm-formatting-highlight,
+    .cm-formatting-link,
+    .cm-formatting-header
+  ):not(.hmd-hidden-token, .hmd-hidden-token *) {
+  color: var(--fl-syntax-color);
+}
+
+body.firelight-syntax-typography-small
+  .markdown-source-view.mod-cm6.is-live-preview
+  .cm-formatting:is(
+    .cm-formatting-em,
+    .cm-formatting-strong,
+    .cm-formatting-strikethrough,
+    .cm-formatting-highlight,
+    .cm-formatting-link
+  ):not(.hmd-hidden-token, .hmd-hidden-token *, .cm-formatting *) {
   font-size: 0.88em;
-  opacity: 0.52;
-}
-
-body.firelight-syntax-marks-clear .markdown-source-view.mod-cm6 .cm-formatting {
-  color: inherit;
-  font-size: inherit;
-  opacity: 1;
-}
-
-body.firelight-syntax-marks-minimal .markdown-source-view.mod-cm6 .cm-formatting {
-  color: var(--text-faint);
-  font-size: 0.76em;
-  opacity: 0.28;
 }
 
 /* Layout */
@@ -1781,50 +1852,52 @@ body.firelight-property-layout-minimal .metadata-container {
 
 body.firelight-property-layout-minimal
   :is(.metadata-properties-heading, .metadata-property-icon) {
-  display: none;
+  color: var(--text-muted);
 }
 
 body.firelight-property-layout-minimal .metadata-add-button {
-  opacity: 0;
+  opacity: var(--fl-opacity-muted);
   transition: opacity var(--anim-duration-fast) ease;
 }
 
 body.firelight-property-layout-minimal
   .metadata-container:is(:hover, :focus-within)
   .metadata-add-button {
-  opacity: var(--fl-opacity-muted);
+  opacity: 1;
 }
 
 .metadata-property-value[data-property-type="tags"] .multi-select-pill {
   line-height: 1.25;
 }
 
-body.firelight-focus-dim
-  .workspace-leaf:not(.mod-active)
-  :is(.view-header, .view-content) {
-  opacity: 0.68;
-  transition: opacity var(--anim-duration-fast) ease;
-}
+@media (hover: hover) {
+  body.firelight-focus-dim
+    .workspace-leaf:not(.mod-active)
+    :is(.view-header, .view-content) {
+    opacity: 0.68;
+    transition: opacity var(--anim-duration-fast) ease;
+  }
 
-body.firelight-focus-dim
-  .workspace-leaf:not(.mod-active):hover
-  :is(.view-header, .view-content) {
-  opacity: 0.88;
-}
+  body.firelight-focus-dim
+    .workspace-leaf:not(.mod-active):is(:hover, :focus-within)
+    :is(.view-header, .view-content) {
+    opacity: 1;
+  }
 
-body.firelight-focus-chrome
-  :is(.workspace-leaf.mod-active .view-header, .status-bar) {
-  opacity: 0.22;
-  transition: opacity var(--anim-duration-fast) ease;
-}
+  body.firelight-focus-chrome
+    :is(.workspace-leaf.mod-active .view-header, .status-bar) {
+    opacity: 0.22;
+    transition: opacity var(--anim-duration-fast) ease;
+  }
 
-body.firelight-focus-chrome
-  :is(
-    .workspace-leaf.mod-active:hover .view-header,
-    .workspace-leaf.mod-active:focus-within .view-header,
-    .status-bar:hover
-  ) {
-  opacity: 1;
+  body.firelight-focus-chrome
+    :is(
+      .workspace-leaf.mod-active:hover .view-header,
+      .workspace-leaf.mod-active:focus-within .view-header,
+      .status-bar:is(:hover, :focus-within)
+    ) {
+    opacity: 1;
+  }
 }
 
 /* Blockquotes */
@@ -1917,19 +1990,17 @@ body.firelight-callout-edge-strong {
 }
 
 .callout {
-  border-width: 0;
   border-inline-start: var(--fl-callout-rule) solid
     color-mix(
       in oklch,
       var(--callout-color) var(--fl-rule-alpha-2),
       transparent
     );
-  background: color-mix(
+  background-color: color-mix(
     in oklch,
     var(--callout-color) var(--fl-callout-tint),
     transparent
   );
-  box-shadow: none;
 }
 
 /* Code blocks */
@@ -1942,10 +2013,7 @@ body.firelight-code-wrap-off {
   --code-white-space: pre;
 }
 
-/*
- * Scrolling on the pre would carry the copy button along with the content,
- * so the code element scrolls and the pre stays put as its positioning box.
- */
+/* Scroll the code without moving its copy button. */
 .markdown-rendered pre {
   overflow-x: visible;
 }
@@ -1954,11 +2022,11 @@ body.firelight-code-wrap-off {
   display: block;
   overflow-x: auto;
   white-space: var(--code-white-space);
-  overflow-wrap: normal;
+  overflow-wrap: anywhere;
 }
 
-body.firelight-code-wrap-on .markdown-rendered pre > code {
-  overflow-wrap: anywhere;
+body.firelight-code-wrap-off .markdown-rendered pre > code {
+  overflow-wrap: normal;
 }
 
 /* Active line */
@@ -1999,24 +2067,42 @@ body.firelight-active-line-none
 
 /* Images */
 
+/* stylelint-disable selector-class-pattern -- CodeMirror's internal buffer image */
 :is(.markdown-rendered, .markdown-source-view.mod-cm6)
-  :is(.image-embed, img:not(.emoji)) {
+  :is(.image-embed, img):not(.emoji, .link-favicon, .highlight-swatch, .cm-widgetBuffer) {
   max-width: 100%;
+}
+
+/* Preserve explicit image heights, including heights on embed wrappers. */
+:is(.markdown-rendered, .markdown-source-view.mod-cm6)
+  img:not(
+    .emoji, .link-favicon, .highlight-swatch, .cm-widgetBuffer,
+    [height], [style*="height" i],
+    :is(.image-embed, .image-wrapper):is([height], [style*="height" i]) *
+  ) {
   height: auto;
 }
 
+/* stylelint-disable selector-pseudo-class-disallowed-list -- Direct-child checks preserve explicit image dimensions. */
 body.firelight-image-width-fill
   :is(.markdown-rendered, .markdown-source-view.mod-cm6)
-  :is(.image-embed, img:not(.emoji)) {
+  :is(.image-embed, .image-wrapper, img):not(
+    .emoji, .link-favicon, .highlight-swatch, .cm-widgetBuffer,
+    [width], [height], [style*="width" i], [style*="height" i],
+    :is(.image-embed, .image-wrapper):is(
+      [width], [height], [style*="width" i], [style*="height" i]
+    ) *,
+    :has(
+      > :is(.image-wrapper, img):is([width], [height], [style*="width" i], [style*="height" i]),
+      > .image-wrapper > img:is([width], [height], [style*="width" i], [style*="height" i]),
+      > :is(.emoji, .link-favicon, .highlight-swatch, .cm-widgetBuffer),
+      > .image-wrapper > :is(.emoji, .link-favicon, .highlight-swatch, .cm-widgetBuffer)
+    )
+  ) {
   width: 100%;
 }
-
-body.firelight-image-width-fill
-  :is(.markdown-rendered, .markdown-source-view.mod-cm6)
-  .image-embed
-  :is(.image-wrapper, img:not(.emoji)) {
-  width: 100%;
-}
+/* stylelint-enable selector-pseudo-class-disallowed-list */
+/* stylelint-enable selector-class-pattern */
 
 /* Links */
 
@@ -2160,41 +2246,60 @@ body.firelight-link-underline-never {
   --fl-link-underline-hover: none;
 }
 
-/*
- * Obsidian's external mark is a fixed grey image. Redrawn as a mask so it can
- * take a theme color, one step below body text so it reads as metadata.
- * Scoped as Obsidian scopes it, since Live Preview has no .markdown-rendered.
- */
-.external-link {
-  padding-inline-end: 0;
-  background-image: none;
-}
-
-.external-link::after {
-  display: inline-block;
-  width: 0.78em;
-  height: 0.78em;
-  margin-inline-start: 0.18em;
-  background-color: var(--fl-ink-3);
-  content: "";
-  mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M14 9 L3 9 3 29 23 29 23 18 M18 4 L28 4 28 14 M28 4 L14 18' stroke='black' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
-  mask-position: center;
-  mask-repeat: no-repeat;
-  mask-size: contain;
-  vertical-align: -0.02em;
-}
-
-
 /* Lists and tasks */
+
+body.firelight-list-marker-color-muted {
+  --list-marker-color: var(--text-muted);
+}
+
+body.firelight-list-marker-color-faint {
+  --list-marker-color: var(--text-faint);
+}
+
+body.firelight-list-marker-color-accent {
+  --list-marker-color: var(--color-accent);
+}
+
+body.firelight-list-marker-size-small {
+  --fl-list-marker-scale: 0.88;
+}
+
+body.firelight-list-marker-size-large {
+  --fl-list-marker-scale: 1.12;
+}
+
+/* Resize the painted bullet, not its wrapper or folding target. */
+body:is(.firelight-list-marker-size-small, .firelight-list-marker-size-large)
+  :is(.markdown-rendered, .markdown-source-view.mod-cm6) {
+  --list-bullet-size: calc(0.3em * var(--fl-list-marker-scale));
+}
+
+body:is(.firelight-list-marker-size-small, .firelight-list-marker-size-large)
+  .markdown-rendered
+  :is(ol, ul:not(.has-list-bullet)) > li:not(.task-list-item)::marker {
+  font-size: calc(1em * var(--fl-list-marker-scale));
+}
+
+/* stylelint-disable selector-class-pattern -- Obsidian's native task and code line classes */
+body:is(.firelight-list-marker-size-small, .firelight-list-marker-size-large)
+  .markdown-source-view.mod-cm6
+  .cm-formatting-list-ol:not(.HyperMD-task-line *, .HyperMD-codeblock *),
+body:is(.firelight-list-marker-size-small, .firelight-list-marker-size-large)
+  .markdown-source-view.mod-cm6:not(.is-live-preview)
+  .cm-formatting-list-ul:not(.HyperMD-task-line *, .HyperMD-codeblock *) {
+  font-size: calc(1em * var(--fl-list-marker-scale));
+
+  /* Compensate for em-based indentation and keep the normal line height. */
+  padding-inline-start: calc(var(--list-padding-inline-start) / var(--fl-list-marker-scale));
+  line-height: calc(var(--line-height-normal) / var(--fl-list-marker-scale));
+}
+/* stylelint-enable selector-class-pattern */
 
 body.firelight-task-done-dim {
   --checklist-done-decoration: none;
 }
 
-/*
- * Obsidian marks every alternate task state as merely checked, so [/], [!] and
- * the rest are indistinguishable. Each one gets its own mark and hue here.
- */
+/* Alternate task states share the checked state but retain distinct symbols. */
 
 :is(
   input[data-task="/"],
@@ -2678,25 +2783,21 @@ body.firelight-embed-layout-panel {
 
 body.firelight-embed-layout-box {
   --embed-background: transparent;
+  --embed-border-start: var(--fl-rule-1) solid var(--background-modifier-border-hover);
+  --embed-border-end: var(--embed-border-start);
+  --embed-border-top: var(--embed-border-start);
+  --embed-border-bottom: var(--embed-border-start);
+}
+
+body:is(.firelight-embed-layout-panel, .firelight-embed-layout-box) {
+  --embed-padding: var(--size-4-3) var(--size-4-4);
 }
 
 .markdown-embed {
   position: relative;
   box-sizing: border-box;
   max-width: 100%;
-  padding-inline: 0;
-  border: 0;
   border-radius: var(--radius-m);
-  background: transparent;
-}
-
-body:is(.firelight-embed-layout-panel, .firelight-embed-layout-box) .markdown-embed {
-  padding: var(--size-4-3) var(--size-4-4);
-  background: var(--embed-background);
-}
-
-body.firelight-embed-layout-box .markdown-embed {
-  border: var(--fl-rule-1) solid var(--background-modifier-border-hover);
 }
 
 .markdown-embed > .markdown-embed-title {
@@ -2715,26 +2816,23 @@ body.firelight-embed-layout-box .markdown-embed {
   pointer-events: none;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.markdown-embed :is(.markdown-embed-title, .markdown-embed-link) {
   opacity: 0;
   transition: opacity var(--anim-duration-fast) ease;
 }
 
 .markdown-embed:is(:hover, :focus-within)
-  :is(.markdown-embed-title, .markdown-embed-link) {
+  > .markdown-embed-title {
   opacity: var(--fl-opacity-muted);
 }
 
 body.firelight-embed-label-always
   .markdown-embed
-  :is(.markdown-embed-title, .markdown-embed-link) {
+  > .markdown-embed-title {
   opacity: var(--fl-opacity-muted);
 }
 
 body.firelight-embed-label-hidden
-  :is(.markdown-embed-title, .markdown-embed-link) {
+  .markdown-embed > .markdown-embed-title {
   display: none;
 }
 
@@ -2837,6 +2935,10 @@ body.firelight-tag-surface-medium {
   --fl-tag-tint: var(--fl-tint-2);
 }
 
+body.firelight-tag-surface-strong {
+  --fl-tag-tint: var(--fl-tint-3);
+}
+
 body.firelight-tag-shape-corner {
   --tag-radius: var(--radius-s);
 }
@@ -2867,7 +2969,6 @@ body.firelight-tag-shape-pill {
   );
 }
 
-.menu,
 .suggestion-container,
 .popover {
   border: 0;
@@ -2876,7 +2977,6 @@ body.firelight-tag-shape-pill {
 
 /* Style Settings panel */
 
-/* A live swatch beside each color dropdown. */
 .style-settings-container
   :is(
     [data-id="firelight-accent"],
@@ -2932,7 +3032,6 @@ body.firelight-tag-shape-pill {
   );
 }
 
-/* Rows that do not apply to the current selection. */
 body:not(.firelight-accent-custom)
   .style-settings-container
   [data-id="fl-accent-custom"],
@@ -2979,9 +3078,16 @@ body:not(.firelight-heading-color-custom)
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body {
+  body,
+  body:is(.firelight-motion-normal, .firelight-motion-reduced, .firelight-motion-off) {
     --anim-duration-fast: 0ms;
     --anim-duration-moderate: 0ms;
     --anim-duration-slow: 0ms;
+  }
+}
+
+@media (hover: none) {
+  .markdown-embed > .markdown-embed-title {
+    opacity: var(--fl-opacity-muted);
   }
 }

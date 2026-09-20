@@ -9,8 +9,7 @@ A quiet theme for long reading and writing, built on the [Firelight palette](htt
 - Three palettes - **Ash** in light, **Smoulder** or **Coal** in dark
 - Hanken Grotesk and Space Mono, embedded in the theme, so nothing to install and both work on mobile
 - Editor set in either face, whichever suits the writing
-- Quiet markdown formatting marks, with three levels of restraint
-- Callouts, blockquotes, tags and tables with adjustable surfaces and edges
+- Markdown syntax, lists, callouts, blockquotes, tags and tables with adjustable visuals
 - Heading scale, heading colors and optional dividers
 - Internal and external links can take separate colors
 - Twenty-one task states, each with its own glyph and hue
@@ -39,7 +38,7 @@ A quiet theme for long reading and writing, built on the [Firelight palette](htt
 2. Create a `Firelight` folder in your vault's `.obsidian/themes/` directory
 3. Put both files in it, then select Firelight under **Appearance**
 
-Requires Obsidian 1.8.0 or later.
+Requires Obsidian 1.13.0 or later, including its updated callout color format.
 
 ## Development
 

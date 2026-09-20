@@ -29,7 +29,7 @@ That symlinks the theme into `test-vault`, which has a specimen note covering he
 - **Reach for an Obsidian variable first if there is one:** Most of the theme is variable assignments rather than rules, which keeps it small and easy to override.
 - **No `!important`:** It stops people overriding the theme with their own snippets.
 - **One grammar for names:** `firelight-<domain>-<property>-<value>`, domain singular, and a setting's id is the exact prefix of every class it emits.
-- **Try to keep the settings flat if possible:** Thirteen sections, no nesting, so everything is one click away.
+- **Try to keep the settings flat if possible:** Use named sections without nesting so everything is one click away.
 - **Check all three palettes:** Make sure things work across all three palettes, Coal, Smoulder, Ash.
 - **Features must work** with Style Settings absent.
 
@@ -39,6 +39,9 @@ That symlinks the theme into `test-vault`, which has a specimen note covering he
 An option is a `class-select` or `class-toggle` in the `@settings` block plus the classes it emits. Give it a description: the settings panel searches those as well as titles.
 
 Defaults have to work with Style Settings absent, so the base `body` rule must already produce the default appearance, and the option classes override it.
+
+Before adding an option, read the existing settings and the CSS that implements that feature. Extend its existing section instead of introducing another control for the same behavior.
+Use **None, Subtle, Medium, Strong** for surface strength and **None, Thin, Medium, Thick** for border thickness. Use **Native** when leaving an app-controlled property unchanged.
 
 ## Reporting a problem
 

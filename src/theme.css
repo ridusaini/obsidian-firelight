@@ -606,26 +606,6 @@ settings:
         label: Accent
         value: firelight-active-line-color-accent
   -
-    id: firelight-images
-    title: Images
-    type: heading
-    level: 1
-    collapsed: true
-  -
-    id: firelight-image-width
-    title: Width
-    description: Fit keeps the image's own size, up to the note width. Fill stretches unsized content images. Explicit dimensions are preserved.
-    type: class-select
-    allowEmpty: false
-    default: firelight-image-width-fit
-    options:
-      -
-        label: Fit
-        value: firelight-image-width-fit
-      -
-        label: Fill
-        value: firelight-image-width-fill
-  -
     id: firelight-links
     title: Links
     type: heading
@@ -2049,25 +2029,6 @@ body.firelight-active-line-none
   height: auto;
 }
 
-/* stylelint-disable selector-pseudo-class-disallowed-list -- Direct-child checks preserve explicit image dimensions. */
-body.firelight-image-width-fill
-  :is(.markdown-rendered, .markdown-source-view.mod-cm6)
-  :is(.image-embed, .image-wrapper, img):not(
-    .emoji, .link-favicon, .highlight-swatch, .cm-widgetBuffer,
-    [width], [height], [style*="width" i], [style*="height" i],
-    :is(.image-embed, .image-wrapper):is(
-      [width], [height], [style*="width" i], [style*="height" i]
-    ) *,
-    :has(
-      > :is(.image-wrapper, img):is([width], [height], [style*="width" i], [style*="height" i]),
-      > .image-wrapper > img:is([width], [height], [style*="width" i], [style*="height" i]),
-      > :is(.emoji, .link-favicon, .highlight-swatch, .cm-widgetBuffer),
-      > .image-wrapper > :is(.emoji, .link-favicon, .highlight-swatch, .cm-widgetBuffer)
-    )
-  ) {
-  width: 100%;
-}
-/* stylelint-enable selector-pseudo-class-disallowed-list */
 /* stylelint-enable selector-class-pattern */
 
 /* Links */

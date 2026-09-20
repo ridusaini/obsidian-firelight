@@ -1,8 +1,17 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { execFileSync } from "node:child_process";
+import { parseArgs } from "node:util";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const { values: { version } } = parseArgs({
+  options: { version: { type: "string" } },
+});
+
+if (version !== undefined && !/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/.test(version)) {
+  throw new Error("Use --version with an exact version such as 1.1.1.");
+}
 
 const faces = [
   {
@@ -59,6 +68,22 @@ const banner = `${header[0].trimEnd().replace(
   /\n \*\/$/,
   "\n *\n * Generated from src/theme.css. Edit that file, then run: npm run build\n */",
 )}`;
+
+if (version !== undefined) {
+  const manifestPath = resolve(root, "manifest.json");
+  const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
+  const args = ["version", version, "--no-git-tag-version", "--ignore-scripts", "--allow-same-version"];
+
+  // Let npm keep package.json and package-lock.json in sync without a commit or tag.
+  if (process.env.npm_execpath) {
+    execFileSync(process.execPath, [process.env.npm_execpath, ...args], { cwd: root, stdio: "inherit" });
+  } else {
+    execFileSync("npm", args, { cwd: root, stdio: "inherit" });
+  }
+
+  manifest.version = version;
+  await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+}
 
 await writeFile(
   resolve(root, "theme.css"),

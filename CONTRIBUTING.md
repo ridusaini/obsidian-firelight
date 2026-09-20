@@ -46,3 +46,14 @@ Use **None, Subtle, Medium, Strong** for surface strength and **None, Thin, Medi
 ## Reporting a problem
 
 Include your Obsidian version, which palette you are on, and any settings that differ from the defaults. A screenshot if necessary.
+
+## Releases (maintainers only)
+
+Contributors do not need to change versions or create tags. To prepare a release, pass its version to the build:
+
+```sh
+npm run build -- --version 1.1.1
+npm run lint
+```
+
+This updates the three version files and rebuilds `theme.css`. Use plain `npm run build` for changes that do not need a new version.

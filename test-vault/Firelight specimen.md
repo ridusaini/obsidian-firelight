@@ -106,11 +106,17 @@ export const wideLine = (variant: Variant): string => `${variant} resolves to ${
 
 ## Media
 
-Images stay inside the text column. Fit keeps an image at its own size; Fill stretches it to the note width.
+Images keep their own size and stay inside the text column. A wide landscape gives the page a pause between passages.
 
 ![[Attachments/firelight-landscape.svg]]
 
 ![[Attachments/firelight-panorama.svg]]
+
+Smaller images sit closer to the text, with their dimensions set in the note.
+
+![[Attachments/firelight-landscape.svg|120]]
+
+![[Attachments/firelight-landscape.svg|120x60]]
 
 ## Embeds
 
